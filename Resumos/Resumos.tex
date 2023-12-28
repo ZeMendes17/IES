@@ -350,4 +350,451 @@ Como não devemos dizer muito numa linha, devemos fazer vários commits.
   \includegraphics[scale=0.6]{7}
 \end{center}
 
+\pagebreak
+
+\section{O Processo de Desenvolvimento de Software}
+
+\subsection{Processo}
+
+A fundação para a Engenharia de Software é a camada de processo.
+Um processo de Software é uma framework para as atividades,
+ações, e tarefas necessárias para construir software de alta qualidade.
+Define as técnicas e a framework de gestão para aplicação de métodos,
+ferramentas e pessoas ao longo do processo de desenvolvimento.
+
+\begin{center}
+  \includegraphics[scale=0.6]{8}
+\end{center}
+
+\subsection{Porquê o Processo de Software?}
+
+\begin{center}
+  \includegraphics[scale=0.6]{9}
+\end{center}
+
+\subsection{Processo de Software}
+
+Existem vários tipos de processos de software, no entanto, todos têm:
+
+\begin{itemize}
+  \item \textbf{Especificação (comunicação e planeamento)} - definir o que o sistema deve fazer;
+  \item \textbf{Design e Implementação} - definir a organização do sistema e implementar o sistema;
+  \item \textbf{Validação} - verificar que faz aquilo que o cliente quer;
+  \item \textbf{Evolução} - alterar o sistema em resposta a novos requisitos impostos pelo cliente.
+\end{itemize}
+
+
+Quando discutimos sobre o processo de software, estamos a falar sobre:
+\begin{itemize}
+  \item \textbf{Atividades} - como especificar um modelo de dados, design de uma
+  interface de utilizador, \dots;
+  \item \textbf{Ordem} a ordem destas atividades;
+\end{itemize}
+
+A descrição de processos pode também incluir, \textbf{produtos} (outcome da
+atividade do processo), \textbf{papéis} (roles, responsabilidades das pessoas envolvidas)
+e \textbf{pré-/pós-condições} (são condições que são verdadeiras antes
+e depois de atividade do processo ou de um produto ser produzido).
+
+\pagebreak
+
+O processo de software específica:
+\begin{itemize}
+  \item \textbf{O quê}
+  \item \textbf{Quem}
+  \item \textbf{Quando}
+  \item \textbf{Como}
+\end{itemize}
+
+E incluí
+\begin{itemize}
+  \item \textbf{Papéis} (Roles)
+  \item \textbf{Fluxo de trabalho} (Workflow)
+  \item \textbf{Procedimentos} (Procedures)
+  \item \textbf{Normas} (Standards)
+  \item \textbf{Modelos} (Templates)
+\end{itemize}
+
+\subsection{Pontos Chave}
+
+\textbf{\uline{O processo de Software é um guia}}
+
+\vspace{2mm}
+
+Não existe "um melhor processo para escrever software".
+Um processo que um individuo ou uma organização escolhe e segue depende de:
+\begin{itemize}
+  \item das características específicas do projeto;
+  \item da cultura da organização;
+  \item das habilidades e preferências das pessoas envolvidas.
+\end{itemize}
+
+\vspace{2mm}
+
+Um bom processo aumenta a produtividade de membros da equipa
+menos experientes sem impedir o trabalho/progresso de membros
+mais experientes.
+
+\subsection{Resistência ao Processo de Software}
+
+\begin{flushleft}
+  \textbf{Perceção:} Algumas pessoas vêm seguir um processo como
+  uma sobrecarga (overhead) desnecessária na produtividade.
+  \begin{itemize}
+    \item Interfere com a criatividade;
+    \item Burocracia e regimento;
+    \item Prejudica a agilidade em mercados que evoluem rapidamente.
+  \end{itemize}
+
+  \vspace{2mm}
+
+  \textbf{A realidade:} Grupos que não seguem um processo definido
+  tendem a adicionar processo mais tarde no projeto, como reação
+  a problemas que surgem. Quando o tamanho e a complexidade do projeto
+  aumenta, a importância de seguir processos definidos aumenta proporcionalmente. 
+\end{flushleft}
+
+\pagebreak
+
+\subsection{Fases de Software}
+
+\begin{center}
+  \includegraphics[scale=0.6]{10}
+\end{center}
+
+\subsection{\uline{Modelos} de Processo de Software}
+
+Modelos abstratos que descrevem uma classe abordagens de desenvolvimento
+com características similares.
+
+\vspace{2mm}
+
+Alguns critérios utilizados para distinguir modelos de processos
+de software são:
+\begin{itemize}
+  \item o tempo entre fases (timing);
+  \item critérios de entrada e saída entre fases (entry/exit criteria);
+  \item os artefactos criados durante cada fase;
+\end{itemize}
+
+\vspace{2mm}
+
+Alguns \textbf{exemplos} incluem: Waterfall, Spiral, Rapid Prototyping,
+Incremental, Development, \dots
+
+\subsubsection{Modelos (Tradicionais)}
+
+\begin{flushleft}
+  \textbf{Modelo em Cascata (Waterfall):} É um modelo \uline{Plan-Driven}.
+  Separa e distingue fases de especificação e desenvolvimento.
+
+  \vspace{2mm}
+
+  \textbf{Desenvolvimento Incremental:} A especificação, desenvolvimento
+  e validação são intercalados. Pode ser \uline{Plan-Driven} ou \uline{Agile}.
+
+  \vspace{2mm}
+
+  \textbf{Processos Evolucionários/Iterativos:} O sistema é desenvolvido
+  no ínicio usando uma especificação muito simples, sendo modificada
+  e melhorada de acordo com as necessidades de software.
+
+  \vspace{2mm}
+
+  \textbf{Muitos outros:} A maior parte de sistemas grandes são desenvolvidos
+  usando um processo que incorpora elementos de diferentes modelos.
+\end{flushleft}
+
+\pagebreak
+
+\subsubsection{O Modelo em Cascata (Waterfall)}
+
+\begin{center}
+  \includegraphics[scale=0.6]{11}
+\end{center}
+
+\subsubsection*{Vantagens}
+
+\begin{itemize}
+  \item É simples e fácil de perceber e usar;
+  \item É fácil de planear, um schedule pode ser definido
+  com deadlines para cada fase de desenvolvido e um produto pode ser
+  processado através do processo de desenvolvimento como um carro
+  numa lavagem automática, e ,teoricamente, ser entregue a tempo.
+  \item Fácil de gerir, cada fase tem entregas específicas e um
+  processo de revisão.
+  \item Fases e processos são concluídos um de cada vez.
+  \item Funciona bem onde os requisitos são bem compreendidos.
+\end{itemize}
+
+\subsubsection*{Desvantagens}
+
+\begin{itemize}
+  \item Dificuldade em acomodar mudanças após o processo começar.
+  Em principio, uma fase deve ser concluída antes de começar a próxima.
+  Particionamento inflexível do projeto em fases distintas torna difícil
+  responder a mudanças nos requisitos do cliente.
+  \item Modelo não muito bom para projetos de longa duração ou que já estão em andamento
+  (não é produzido nenhum software funcional até mais tarde no ciclo de vida).
+  \item Não é adequado a processos onde os requisitos são incertos ou
+  onde há risco de serem alterados.
+\end{itemize}
+
+\pagebreak
+
+\subsubsection{Modelo Incremental}
+
+Uma característica de modelos com ciclos de vida modernos.
+O produto evolui através de uma série de iterações.
+
+\begin{center}
+  \includegraphics[scale=0.5]{12}
+\end{center}
+
+\subsubsection*{Benefícios}
+
+\begin{itemize}
+  \item O custo de \textbf{acomodar mudanças de requisitos do cliente} é reduzido.
+  A quantidade de análise e documentação que tem de ser refeita é muito menor
+  do que no modelo em cascata.
+
+  \item É mais fácil \textbf{obter feedback do cliente} sobre o desenvolvimento
+  do trabalho que já está concluído.
+  Clientes podem comentar sobre demonstrações do software e ver
+  quanto foi implementado.
+
+  \item \textbf{Entrega mais rápida e deployment} do software útil
+  para o cliente é possível. Os clientes podem usar e ganhar valor
+  do software mais cedo do que se o sistema fosse desenvolvido
+  com o processo em cascata.
+\end{itemize}
+
+\subsubsection*{Problemas}
+
+\begin{itemize}
+  \item \textbf{Cada fase de iteração é rigida} e não se sobrepoem
+  umas com as outras.
+
+  \item O processo não é visível. Os gestores precisam  de entragas regulares
+  para medir o progresso. No entanto, se o sistema não for desenvolvido rapidamente,
+  não é cost-effective produzir documentos que reflitam cada versão do sistema.
+
+  \item A estrutura do sistema tende a degradar-se à medida que novos
+  incrementos são adicionados. A não ser que tempo e dinheiro seja
+  gasto na refatoração para melhorar o software,
+  \textbf{regular mudanças tende a corromper a sua estrutura}.
+  A medida que vamos incorporando novas mudanças de doftware,
+  torna-se mais difícil e mais caro.
+\end{itemize}
+
+\pagebreak
+
+\subsubsection{Modelos Evolucionários/Iterativos}
+
+\begin{flushleft}
+  \textbf{Prototipagem:} Geralmente, um cliente define um conjunto
+  de objetivos gerais para o software, mas não identifica requisitos
+  detalhados para funções e funcionalidades do sistema.
+
+  \vspace{2mm}
+
+  \textbf{Modelo Espiral:} Utilizando um modelo espiral, o software é desenvolvido
+  numa serie de lançamentos (releases) evolutivos. Durante as primeiras iterações,
+  o lançamento pode ser um protótipo ou um modelo.
+
+  \vspace{2mm}
+
+  \textbf{Modelo Concurrente:} Permite a uma equipa de software representar
+  elementos iterativos e concurrentes de quaisquer modelos de processo.
+\end{flushleft}
+
+\subsubsection{Incremental vs Evolucionário/Iterativo}
+
+\begin{center}
+  \includegraphics[scale=0.5]{13}
+\end{center}
+
+\subsubsection{Exemplos}
+
+\begin{center}
+  \includegraphics[scale=0.32]{14}
+  \includegraphics[scale=0.32]{15}
+\end{center}
+
+\pagebreak
+
+\subsection{Outros Modelos de Processo}
+
+\begin{itemize}
+  \item Desenvolvimento \textbf{Component-Based} (COTS): O processo
+  para aplicar quando reutilizar é um objetivo do desenvolvimento.
+
+  \item \textbf{Métodos Formais}: Enfatiza a especificação matemática
+  dos requisitos.
+
+  \item \textbf{Processo Unificado (UP)}: Um processo de software
+  "use-case driven, arquitetura-centric, iterativo e incremental",
+  alinhado com o Unified Modeling Language (UML).
+\end{itemize}
+
+\subsection{Processo Unificado (UP)}
+
+\begin{center}
+  \includegraphics[scale=0.4]{16}
+\end{center}
+
+\subsubsection{Fases}
+
+\begin{center}
+  \includegraphics[scale=0.4]{17}
+\end{center}
+
+\pagebreak
+
+\subsection{Processos Plan-Driven e Agile}
+
+\textbf{Processos Plan-Driven} são processos onde todas as atividades
+são planeadas \uline{anteciadamente} e o progresso é medido
+contra este plano.
+
+\vspace{2mm}
+
+Em \textbf{Processos Agile}, planear é incremental e é mais fácil
+mudar o processo para refletir a mudança nos requisitos do cliente.
+
+\vspace{2mm}
+
+Na prática, a maior parte dos processos incluem elementos de ambos,
+processos plan-driven e agile. Não existem processos de software
+"certos" ou "errados".
+
+\subsubsection{Processos Plan-Driven vs Agile}
+
+\begin{center}
+  \includegraphics[scale=0.5]{18}
+\end{center}
+
+\subsubsection{Processos Agile}
+
+Desenvolvimento rápido e entragas são, geralmente, os requisitos
+mais importantes para sistemas de software.
+\begin{itemize}
+  \item Negócios operam num ambiente \textbf{fast-changing requirements}
+  e é praticamente impossível produzir um conjunto de requisitos de software
+  estáveis.
+  \item O Software deve evoluir rapidamente para refletir mudanças de
+  negócios.
+\end{itemize}
+
+\vspace{2mm}
+
+Desenvolvimento Plan-Driven é essencialmente para alguns tipos de sistemas
+mas não cobre as necessidades do negócio.
+
+\subsubsection*{Métodos Agile}
+
+\begin{itemize}
+  \item Métodos Agile foram desenvolvidos num esforço para ultrapassar
+  fraquezas percetidas e reais em engenharia de software convencional.
+  
+  \item \textbf{Foca no código em vez de no design}.
+  
+  \item Baseados em \textbf{abordagens iterativas} ao desenvolvimento
+  de software.
+
+  \item Tem a intenção de \textbf{entregar software funcional rapidamente}
+  e evoluir rapidamente para refletir mudanças de requisitos do cliente.
+\end{itemize}
+
+\pagebreak
+
+\subsubsection{Origem: Manifesto Agile}
+
+"We are uncovering better ways of developing
+software by doing it and helping others do it.
+Through this work we have come to value:
+
+\begin{itemize}
+  \item \textbf{Individuals and interactions} over processes and tools
+  \item \textbf{Working software} over comprehensive documentation
+  \item \textbf{Customer collaboration} over contract negotiation
+  \item \textbf{Responding to change} over following a plan
+\end{itemize}
+
+That is, while there is value in the items on the right,
+we value the items on the left more."
+
+\subsubsection{Princípios dos Métodos Agile}
+
+\begin{flushleft}
+  \textbf{Involvimento do cliente:} Os clientes devem estar envolvidos
+  durante todo o porcesso de desenvolvimento. O seu papel é fornecer
+  e priorizar novos requisitos e avaliar as iterações do sistema.
+\end{flushleft}
+
+\subsubsection{Desenvolvimento Plan-Driven e Agile}
+
+\begin{center}
+  \includegraphics[scale=0.4]{19}
+\end{center}
+
+\begin{flushleft}
+  \textbf{Desenvolvimento Plan-Driven:}
+  \begin{itemize}
+    \item Baseado ao redor de um desenvolvimento separado de fases,
+    com outputs a serem produzidos em cada fase planeada anteciadamente.
+    \item Não é necessariamente o modelo em cascata - desenvolvimento
+    incremental, plan-driven, é possível.
+  \end{itemize}
+
+  \vspace{2mm}
+
+  \textbf{Desenvolvimento Agile:}
+  \begin{itemize}
+    \item Especificação, design, implementação e testes são intercalados.
+    \item Os outputs do processo de desenvolvimento são decididos
+    através de um processo de negociação durante o processo de desenvolvimento
+    de software.
+  \end{itemize}
+\end{flushleft}
+
+\pagebreak
+
+\subsubsection{Métodos Agile - Benefícios}
+
+\begin{itemize}
+  \item Requisitos num modelo Agile podem ser alterados
+  conforme os requisitos do cliente mudam. Por vezes os requisitos
+  não são muito claros. Mudanças nos requisitos são aceites
+  mesmo em fases avançadas do processo de desenvolvimento.
+
+  \item A entrega de software é continua. Clientes podem seguir
+  cada feature funcional do Sprint do software.
+
+  \item Refatorar o código não é muito caro.
+\end{itemize}
+
+\subsubsection{Métodos Agile - Desvantagens}
+
+\begin{itemize}
+  \item A documentação é escassa.
+  \item Com requisitos pouco claros, é difícil estimar o resultado pretendido.
+  Mais díficil de estimar o esforço necessário.
+  \item Alguns riscos desconhecidos/imprevisiveis que podem afetar o desenvolvimento do projeto. 
+\end{itemize}
+
+\subsubsection{Métodos Agile - Aplicabilidade}
+
+\begin{itemize}
+  \item Desenvolvimento de produtos, onde uma empresa de software está a desenvolver
+  um produto pequeno/médio em tamanho para venda.
+
+  \item Desenvolvimento de sistemas customizados dentro de uma organização,
+  onde existe o compromisso do cliente ficar envolvido no processo de desenvolvimento
+  e onde existem algumas regras/regulamentos externos que afetam o software.
+  
+  \item Virtualmente, todos os produtos de software e aplicações são desenvolvidas
+  usando abordagens Agile.
+\end{itemize}
+
 \end{document}
