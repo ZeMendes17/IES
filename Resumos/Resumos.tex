@@ -1186,6 +1186,141 @@ A equipa vai a reuniões diárias curtas (\textbf{Scrums})
 
 \subsubsection{Kanban}
 
+É um sistema ágil que pode ser usado para melhorar qualquer desenvolvimento
+de software incluindo Scrum, XP ou Waterfall.
+
+\vspace{2mm}
+
+O nome "Kanban" vem do Japonês e significa "signboard" ou "billboard".
+Foi usado pela primeira vez pela Toyota para Just-in-time manufacturing
+plants, com o objetivo de limitar o trabalho em progresso (WIP - work in progress).
+
+\subsubsection{Scrum vs Kanban}
+
+Em \textbf{Scrum}, tu escolhes o trabalho que vais fazer durante o
+próximo sprint antes deste começar. Depois, damos \uline{lock}
+ao sprint, fazemos o trabalho todo, e passado algumas semanas
+(duração normal para um sprint), a queue fica vazia.
+
+\begin{center}
+  \includegraphics[scale=0.48]{30}
+\end{center}
+
+Em \textbf{Kanban}, tudo o que é limitado é o tamanho das queues,
+chamado de \textbf{work in progress (WIP) limits}. Podemos alterar
+os items na queue a qualquer momento, não existindo
+um "fim de sprint". O trabalho continua a fluir.  
+
+\begin{center}
+  \includegraphics[scale=0.48]{31}
+\end{center}
+
+
+\pagebreak
+
+\begin{center}
+  \includegraphics[scale=0.4]{32}
+\end{center}
+
+\subsection{Scaling Agile Methods}
+
+Métodos Agile provaram ser muito eficazes para projetos
+pequenos/médios, que podem ser desenvolvidos por uma equipa
+pequena co-localizada.
+Escalar métodos Agile involve mudar estes para poderem ser
+utilizados em projetos cada vez maiores, onde existem múltiplas
+equipas de desenvolvimento, podendo trabalhar até mesmo em diferentes
+locais.
+
+\vspace{2mm}
+
+Quando escalamos métodos Agile, é importante manter fundamentos
+Agile: Planeamento flexivel, releases de sistema frequentes,
+integração contínua, desenvolvimento test-driven e boa comunicação
+entre a equipa.
+
+\subsubsection{Problemas de Sistema}
+
+\begin{itemize}
+  \item Quão grande é o sistema a ser desenvolvido? Métodos Agile
+  \uline{são mais eficientes em equipas pequenas e co-localizadas}, em que
+  ocorre uma comunicação informal.
+
+  \item Que tipo de sistema está a ser desenvolvido? Sistemas que necessitem
+  de \textbf{muita análise antes da implementação} precisam de um
+  design (mais) detalhado.
+
+  \item Qual é o tempo de vida esperado do sistema?
+  \textbf{Sistemas de longa duração necessitam de documentação} para comunicar
+  as intenções do sistema com os developers da equipa de suporte.
+
+  \item O sistema está sujeito a regulamentos externos?
+  Se o sistema é regulado, muito provavelmente, é necessário
+  \textbf{produzir documentação detalhada} como parte do caso de segurança do
+  sistema.
+\end{itemize}
+
+\subsubsection{Desenvolvimento de Sistemas Grandes}
+
+Sistemas grandes são normalmente coleções de sistemas de comunicação separados,
+onde \textbf{equipas separadas} desenvolvem cada sistema. Frequentemente,
+estas equipas trabalham em locais diferentes, por vezes até em zonas com diferentes fusos horários.
+
+\vspace{2mm}
+
+Sistemas grandes são "\textbf{brownfield systems}" isto é,
+incluem e interagem com vários sistemas existentes.
+Muitos dos requisitos do sistema estão relacionados com a interação, logo
+não se rendem muito à flexibilidade e desenvolvimento incremental.
+
+\pagebreak
+
+Sistemas grandes e os seus processos de desenvolvimento são
+muitas vezes restritos por \textbf{regras e regulamentos externos},
+limitando a forma como podem ser desenvolvidos.
+
+\vspace{2mm}
+
+Sistemas grandes tem uma \textbf{aquisição longa} e
+um tempo de desenvolvimento longo também. É dificil de manter equipas
+coerentes que sabem sobre o sistema durante esse periodo, uma vez que,
+eventualmente, os membros vão para outros projetos ou trabalhos.
+
+\vspace{2mm}
+
+Sistemas grandes normalmente tem um conjunto diverso de
+\textbf{stakeholders}. É praticamente impossível involver todos estes
+stakeholders no processo desenvolvido.
+
+\subsubsection{Agile: Scaling up em sistemas grandes}
+
+\begin{itemize}
+  \item Uma \uline{abordagem completamente incrementeal aos requisitos de engenharia} é \textbf{impossível};
+  \item \textbf{Não pode existir} um único \uline{product owner};
+  \item \textbf{Não é possível} \uline{focar apenas no código};
+  \item \uline{Mecanismos de comunicação cross-team} têm de ser \textbf{designed} e \textbf{utilizados};
+  \item \uline{Integração continua} é praticamente \textbf{impossível}, no entanto, é essencial
+  manter builds frequentes do sistema e regular releases do sistems;
+\end{itemize}
+
+\subsubsection{Multi-team Scrum}
+
+\begin{itemize}
+  \item \textbf{Role replication}: Cada equipa tem um Product Owner para o
+  seu trabalho e Scrum Master.
+
+  \item \textbf{Product architects}: Cada equipa escolhe um arquiteto
+  do produto que colaboram para desenhar e evoluir toda a arquitetura
+  do sistema.
+
+  \item \textbf{Release alignment}: As datas de releases de produtos
+  de cada equipa são alinhadas de modo a demonstrar que um sistema
+  completo está produzido.
+
+  \item \textbf{Scrum of scrums}: Existe um Scrum of scrums diário, onde
+  os representantes de cada equipa se encontram para discutir o progresso
+  e o plano de trabalho a ser concluído.
+\end{itemize}
 
 
 \end{document}
