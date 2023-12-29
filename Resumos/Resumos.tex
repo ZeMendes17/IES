@@ -797,4 +797,395 @@ we value the items on the left more."
   usando abordagens Agile.
 \end{itemize}
 
+\pagebreak
+
+\section{Desenvolvimento de Software Agile}
+
+\subsection{Princípios Agile}
+
+\subsubsection{Porquê Agile?}
+
+O desenvolvimento rápido e entrega são, geralmente, os requisitos
+mais importantes para sistemas de software.
+\begin{itemize}
+  \item Negócios operam num ambiente \textbf{fast-changing requirements}
+  e é praticamente impossível produzir um conjunto de requisitos de software
+  estáveis.
+  \item O Software deve evoluir rapidamente para refletir mudanças de
+  negócios.
+\end{itemize}
+
+\vspace{2mm}
+
+Princípios Agile:
+\begin{itemize}
+  \item \textbf{Focada no código em vez de no design};
+  \item Baseados em \textbf{abordagens iterativas} ao desenvolvimento
+  de software;
+  \item Tem a intenção de \textbf{entregar software funcional rapidamente}
+  e evoluir rapidamente para refletir mudanças de requisitos do cliente.
+\end{itemize}
+
+\begin{center}
+  \includegraphics[scale=0.5]{20}
+\end{center}
+
+Ver analogia nos slides 6 a 15.
+
+\pagebreak
+
+\subsection{Técnicas de Desenvolvimento Agile}
+
+As fases especificação, design, implementação e avaliação são intercaladas:
+\begin{itemize}
+  \item O sistema é desenvolvido  como uma série de versões, envolvendo
+  \textbf{stakeholders} na especificaçãon e avaliação;
+  \item Entregas de novas versões frequente para avaliação;
+\end{itemize}
+
+Vasto suporte de ferramentas (ex: ferramentas de testes automáticos) usado
+para suportar o desenvolvimento.
+
+\vspace{2mm}
+
+Miníma documentação, uma vez que o foco é o código.
+
+\begin{center}
+  \includegraphics[scale=0.5]{21}
+\end{center}
+
+\subsubsection{Extreme Programming (XP)}
+
+Extreme Programming (XP) é a abordagem mais utilizada para desenvolvimento
+ágil de software. \textbf{Leva uma abordagem "extrema" para o desenvolvimento iterativo}:
+\begin{itemize}
+  \item Novas versões podem ser contruidas varias vezes por dia;
+  \item Os incrementos são entregues aos clientes \uline{a cada 2 semanas};
+  \item Todos os testes devem correr para cada build e cada buid apenas é aceite
+  se todos os testes correrem com sucesso;
+\end{itemize}
+
+\vspace{2mm}
+
+Utiliza uma abordagem orientada a objetos como o paradigma de desenvolvimento
+preferido. Abrange um conjunto de regras e práticas que
+ocorrem no contexto de quatro atividades fundamentais (framework activities):
+\textbf{planning, design, coding, testing}.
+
+\subsubsection{Release Cycle XP}
+
+\begin{center}
+  \includegraphics[scale=0.55]{22}
+\end{center}
+
+\pagebreak
+
+\subsubsection{Práticas XP}
+
+\begin{center}
+  \includegraphics[scale=0.45]{23}
+  \includegraphics[scale=0.45]{24}
+\end{center}
+
+\subsubsection{Práticas influentes de XP}
+
+Extreme Programming tem um foco técnico e não é fácil de integrar
+com prática de gestão na maior parte das organizações.
+Consequentemente, enquanto desenvolvimento Agile utiliza práticas
+de XP, o método referido não é muito utilizado.
+
+\vspace{2mm}
+
+Práticas Chave:
+\begin{itemize}
+  \item User stories para especificação;
+  \item Refatoração;
+  \item Desenvolvimento Test-First;
+  \item Programação em pares (pair programming);
+\end{itemize}
+
+\subsubsection{User Stories para Requisitos}
+
+Em XP, o cliente ou user são parte da equipa XP e são
+\textbf{responsáveis por tomar decisões sobre requisitos}.
+
+\vspace{2mm}
+
+Requisitos do user são expressos como \textbf{user stories} ou
+\textbf{scenarios}. Estes são escritos em cartões e a equipa
+de desenvolvimento divide-os em \textbf{tarefas de implementação}.
+Estas tarefas são a base das estimativas de custo e de schedule.
+
+\vspace{2mm}
+
+O cliente escolhe as \textbf{stories para inclusão} na próxima release
+baseado em prioridade e estimativa de schedule.
+
+\vspace{2mm}
+
+Exemplo slide 24 e 25.
+
+\pagebreak
+
+\subsubsection{Templates de User Stories}
+
+\begin{center}
+  As a \textbf{(user)}, I \textbf{(want to)}, \textbf{(so that)}.
+\end{center}
+
+\begin{itemize}
+  \item \textbf{User:} Refere o user final do software;
+  \item \textbf{Want to:} Refere à intenção do user, e não
+  à feature que este utiliza. Temos de especificar aquilo que
+  o user quer alcançar com a tarefa, sem mencionar a UI da aplicação;
+
+  \item \textbf{So that:} Descreve a "bigger picture". Qual é o objetivo
+  do user? O que é que ele quer alcançar com esta feature?
+\end{itemize}
+
+
+\begin{flushleft}
+  \textbf{Exemplo:} As a \uline{manager}, I want to be able to
+  \uline{understand my colleagues progress} so that I can
+  \uline{report our success and failures}.
+\end{flushleft}
+
+\subsubsection{Organização de User Stories}
+
+\begin{itemize}
+  \item \textbf{Role-Goal-Benefit:} Força o cliente a realmente pensar
+  quem é que vai beneficiar de uma feature, o que é que eles querem
+  alcançar e porque é que eles querem alcançar isso;
+
+  \item \textbf{Limites/Needs:} Subconjunto de situações que são de interesse para esta feature;
+  \item \textbf{Definição de Done:} Como validar uma feature e saber que esta está concluida?
+  \item \textbf{Tarefas de Engenharia:} Como esta feature interaje com outras features
+  dentro do sistema ou outros subsistemas;
+  \item \textbf{Estimativa de esforço:} Fornece uma medida concreta sobre o valor de uma feature;
+\end{itemize}
+
+\subsubsection{Refatoração}
+
+Conhecimento convencional em engenharia de software é \textbf{design for change}.
+Compensa gastar tempo e esforçarmo-nos a anticipar mudanças, uma vez que,
+reduz o cussto mais à frente no ciclo de vida.
+
+\vspace{2mm}
+
+No entanto, XP mantém que este principio não compensa, uma vez que,
+mudanças não podem ser previstas. Em vez disso, propõe
+\textbf{melhorias contantes do código} (refactoring) para tornar
+mudanças mais fáceis quando têm de ser implementadas.
+
+\vspace{2mm}
+
+Equipas de programação procuram por possíveis \textbf{melhorias de software}
+e fazem-nas mesmo que não sejam necessárias naquele momento.
+Isto melhora a \textbf{compreensão do software} e desta maneira reduz
+a necessidade de documentação.
+
+\vspace{2mm}
+
+Mudanças são \textbf{fáceis de fazer} uma vez que o código é
+\textbf{bem estruturado} e \textbf{claro}. No entanto, algumas mudanças
+requerem \uline{architecture refactoring}, o que é muito mais caro.
+
+\subsubsection*{Exemplo}
+
+\begin{itemize}
+  \item \textbf{Re-organização} de uma classe hierárquica para remover duplicação de código;
+  \item \textbf{Renomear} atributos e métodos de modo a serem mais faceis de entender;
+  \item \textbf{Trocar inline code} com chamadas de métodos que estão incluidas em bibliotecas;
+\end{itemize}
+
+\pagebreak
+
+\subsubsection{Desenvolvimento Test-First}
+
+Testar é uma parte central em XP. O \textbf{desenvolvimento test-first}:
+\begin{itemize}
+  \item Teste incremental é desenvolvido a partir de cenários;
+  \item Envolvimento de users no desenvolvimento de testes e validação;
+  \item Correr todos os testes de componente de cada vez que uma nova versão
+  é built.
+\end{itemize}
+
+\begin{center}
+  \includegraphics[scale=0.5]{25}
+\end{center}
+
+\subsubsection{Automação de Testes}
+
+Testes são escritos como \textbf{componentes executáveis} antes da
+tarefa ser implementada. Estes devem:
+\begin{itemize}
+  \item Ser autonomos (stand-alone);
+  \item Simular a submissão de input para ser testado;
+  \item Verificar que o resultado é o esperado;
+\end{itemize}
+
+Uma \textbf{automated test framework} (ex: Junit) torna mais fácil
+de escrever e executar testes.
+
+\vspace{2mm}
+
+Uma vez que os testes são automáticos, existe um conjunto de testes
+que podem ser rapidamente e facilmente executados. Quando uma nova
+funcionalidade é adicionada ao sistema, todos os testes podem ser executados
+e identificar problemas no novo código imediatamente.
+
+\subsubsection{Problemas com o desenvolvimento Test-First}
+
+\begin{itemize}
+  \item Os programadores preferem programar em vez de escrever testes,
+  pelo que, por vezes estes fazem \textbf{short cuts ao escrever testes}.
+  Como pro exemplo, testes incompletos que não testam todas as possibilidades.
+
+  \item Alguns testes são \textbf{muito difíceis de escrever incrementalmente}.
+  Como testes para uma UI complexa, é difícil escrever testes com display logic.
+
+  \item É dificil de julgar a \textbf{cobertura} de um conjunto de testes.
+  Podemos ter muitos testes de sistema e não cobrir tudo.
+\end{itemize}
+
+\pagebreak
+
+\subsubsection{Programação em Pares (Pair Programming)}
+
+Um parte programadores a trabalharem juntos para desenvolver código.
+Os programadores sentam se juntos num mesmo computador para desenvolver
+software. Serve como uma forma de \textbf{revisão de código informal}
+uma vez que cada linha de código é olhada por mais do que uma pessoa.
+
+\vspace{2mm}
+
+Isto ajuda a desenvolver \uline{common ownership} do código e
+\uline{compreensão coletiva} pela equipa.
+Reduz o risco quando um programador deixa a equipa.
+
+\vspace{2mm}
+
+Em pair programming, os pares são criados dinamicamente
+para que todos os membros da equipa trabalhem uns com os outros durante
+o processo de desenvolvimento. Encoraja a refatorização, uma vez que,
+toda a equipa pode benificiar com a melhoria do código do sistema.
+
+\vspace{2mm}
+
+Pair programming não é necessariamente ineficiente. Estudos mostram
+que um par ao trabalhar junto é mais eficiente do que dois programadores
+a trabalhar separadamente.
+
+\subsection{Gestão de Projeto Agile}
+
+A principar responsabilidade da gestão de projeto de software é
+\textbf{gerir o projeto}, para que o software \uline{seja entregue a tempo}
+e dentro do \uline{budget} planeada para o projeto.
+
+\vspace{2mm}
+
+A abordagem tradicional para a gestão de projeto é \textbf{plan-driven}.
+Define \uline{o que} deve ser entregue, \uline{quando} deve ser entregue e \uline{quem}
+vai trabalhar em cada entrega.
+
+\vspace{2mm}
+
+A gestão de projeto Agile requer uma abordagem diferente.
+É adaptada de um \textbf{desenvolvimento incremental} e as \textbf{praticas
+usadas em métodos agile}.
+
+\subsubsection{Scrum}
+
+É um \textbf{método agile} que foca na gestão incremental do desenvolvimento.
+
+\vspace{2mm}
+
+Existem três fases no Scrum:
+\begin{itemize}
+  \item A fase inicial é o \textbf{outline planning} onde tem de se estabelecer
+  os objetivos gerais para o projeto e fazer o design da arquitetura
+  de software.
+
+  \item Isto é seguido por uma serie de \textbf{ciclos sprint}, onde cada
+  ciclo desenvolve um incremento do sistema.
+
+  \item A fase de \textbf{encerramento do projeto}, termina o projeto,
+  completa a documentação necessária como ajudas nos frames e manual do
+  utilizador e acessa aquilo que foi aprendido com o projeto.
+\end{itemize}
+
+\begin{center}
+  \includegraphics[scale=0.45]{26}
+\end{center}
+
+\pagebreak
+
+\subsubsection{Scrum - Terminologia}
+
+\begin{center}
+  \includegraphics[scale=0.45]{27}
+  \includegraphics[scale=0.45]{28}
+\end{center}
+
+\subsubsection{Scrum sprint cycle}
+
+\begin{center}
+  \includegraphics[scale=0.5]{29}
+\end{center}
+
+O ponto inicial ara o planeamento é o \textbf{product backlog}.
+É uma lista do trabalho a ser feito no projeto.
+
+\vspace{2mm}
+
+A \textbf{fase selecionada} envolve toda a equipa. Quem trabalha com o
+cliente para selecionar as features e as funcionalidades do
+\textbf{product backlog} que vão ser desenvolvidas durante o sprint.
+
+\vspace{2mm}
+
+Durante a \textbf{fase de desenvolvimento}, a equipa está isolada do
+cliente e da organização. Todos os canais de comunicação passam pelo
+"\textbf{Scrum master}".
+
+\vspace{2mm}
+
+No \textbf{final do sprint}, o trabalho realizado é revisto e apresentado aos
+stakeholders.
+
+\subsubsection{Teamwork in Scrum}
+
+O papel do \textbf{Scrum master} é proteger o a equipa de desenvolvimento
+de distrações externas.
+\begin{itemize}
+  \item Realiza reuniões diárias;
+  \item Vai verificando o backlog para ver o trabalho a ser feito;
+  \item Toma decisões;
+  \item Mede o progresso usando o backlog;
+  \item Comunica cocm os clientes e a gestão fora da equipa;
+\end{itemize}
+
+A equipa vai a reuniões diárias curtas (\textbf{Scrums})
+\begin{itemize}
+  \item Membros partilham informação, descrevem o progresso/problemas
+  desde a última reunião, e aquilo que estava planeado para o dia;
+
+  \item Isto significa que todos na equipa sabem aquilo que se passa,
+  os porblemas que surgiram, podem re-planear num curto tempo o trabalho;
+\end{itemize}
+
+\subsubsection{Scrum - Benefícios}
+
+\begin{itemize}
+  \item O produto é repartido num conjunto de pedaços \textbf{geriveis}. e \textbf{faceis de compreender}.
+  \item \textbf{Requisitos instáveis} não prrendem o progresso;
+  \item Toda a equipa tem visibilidade de tudo, consequentemente, a comunicação da equipa melhora;
+  \item Os clientes vêm as entregas on-time dos incrementos, ganhando feedback em como o produto funciona;
+  \item Confiança entre a equipa e o cliente, todos esperam que o projeto tenha sucesso;
+\end{itemize}
+
+\subsubsection{Kanban}
+
+
+
 \end{document}
