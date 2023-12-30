@@ -1322,5 +1322,157 @@ stakeholders no processo desenvolvido.
   e o plano de trabalho a ser concluído.
 \end{itemize}
 
+\pagebreak
+
+\section{DevOps}
+
+\subsection{Metodologia Agile}
+
+\begin{itemize}
+  \item Cada projeto é dividido em várias iterações;
+  \item Todas as iterações devem ter a mesma duração (2-8 semanas);
+  \item No final de cada iteração, um produto funcional deve ser entregue;
+\end{itemize}
+
+\begin{center}
+  \includegraphics[scale=0.45]{33}
+\end{center}
+
+\subsection{Quais são as limitações de Agile?}
+
+Enquanto que a parte de Desenvolvimento é continua,
+a parte de Operações não é.
+
+\begin{center}
+  \includegraphics[scale=0.6]{34}
+\end{center}
+
+
+\subsection{Dev vs Ops}
+
+A equipa de \textbf{desenvolvimento} começa a trabalhar no projeto,
+"atirando" uma realease de software "por cima da parede" para as
+Operações.
+
+\vspace{1mm}
+
+As \textbf{Operações} pegam nos artefactos da release e começam
+a preparar o seu desenvolvimento. Estes também  editam os ficheiros
+de configuração para refletir o ambiente de produção
+(que é \textbf{bastante diferente dos ambientes de Desenvolvimento}).
+
+\pagebreak
+
+Em caso de falha\dots
+\begin{itemize}
+  \item Os Developers são chamados para resolver o problema;
+  \item \textbf{Operações} afirma que \uline{O Desenvolvimento
+  deu código defeituoso};
+  \item \textbf{Desenvolvimento} responde apontando o facto de que
+  \uline{funcionava perfeitamente nos seus ambientes}
+  (logo o problema é das Operações, que fizeram algo de errado).
+  \item Os Developers estão a ter dificuldades em sequer perceber o problema.
+  Devido à configuração, localização dos ficheiros, ao procedimento utilizado
+  para chegar a esse estado é diferente do esperado.
+\end{itemize}
+
+\begin{center}
+  \textbf{Qual é a Solução?}
+\end{center}
+
+\subsection{DevOps}
+
+DevOps é sobre a remoção das barreiras entre duas equipas
+tradicionalmente isoladas: \textbf{Desenvolvimento} e \textbf{Operações}.
+
+\vspace{2mm}
+
+Em algumas organizações, pode nem haver uma equipa separada,
+\textbf{os engenheiros fazem ambos}.
+
+\vspace{2mm}
+
+As \textbf{duas equipas trabalham juntas} de modo a otimizar
+tanto a produtividade dos desenvolvedores e a fiabilidade
+das operações.
+Estas \textbf{comunicam frequentemente} aumentando a eficiência
+e a qualidade dos serviços que fornecem aos clientes.
+
+Têm um \textbf{ownership completo para os seus serviços}, pensando
+nas necessidades dos clientes finais e como podem contribuir para
+resolver essas necessidades.
+
+\vspace{2mm}
+
+As equipas vêm o ciclo completo de desenvolvimento e infrastruturas
+como parte das suas responsabilidades.
+
+\begin{center}
+  \includegraphics[scale=0.6]{35}
+\end{center}
+
+\pagebreak
+
+\begin{itemize}
+  \item \textbf{Desenvolvimento} Agile. Gestão do código fonte
+  (Plan, Code, Build). Manutenção de diferentes versões do código;
+  \item \textbf{Integração} Contínua (Integrate, Test).
+  Compilar, revisão de código, testes unitários, testes de integração;
+  \item \textbf{Entrega} Contínua (Release). Deploy da aplicação (build), realizando
+  testes de aceitação nos users;
+  \item \textbf{Desenvolvimento} Contínuo (Deploy, Operate). Deploy na
+  aplicação testada/aceite;
+  \item \textbf{Monitorização} Contínua;
+\end{itemize}
+
+\subsubsection{DevOps - Ciclo de Vida}
+
+\begin{center}
+  \includegraphics[scale=0.55]{36}
+\end{center}
+
+\subsubsection{DevOps - Como implementar?}
+
+\begin{center}
+  \includegraphics[scale=0.55]{37}
+\end{center}
+
+\pagebreak
+
+\subsection{Um asset chave: Infrastrutura como Código (IaC)}
+
+\textbf{a.k.a. Programmable Infrastructure} ou \textbf{software-defined
+infrastructure}
+\begin{itemize}
+  \item A infrastrutura é decrita por código e pode ser trackeada,
+  validada, e reconfigurada de forma automática;
+  \item Engenheiros DevOps podem interagir com a infraestrutura utilizando
+  ferramentas code-based e \textbf{tratando a infrastrutura de uma
+  forma semelhante a como tratam o código da aplicação};
+\end{itemize}
+
+\vspace{2mm}
+
+Gestão de configuração
+\begin{itemize}
+  \item Developers e administradores de sistemas usam código para
+  \uline{automar sistemas operativos} e \uline{configurar hosts},
+  \uline{tarefas operacionais}, e mais;
+  \item A utilização de código faz com que as mudanças na configuração
+  sejam \uline{repetíveis} e \uline{padronizadas};
+\end{itemize}
+
+\subsection{Integração Contínua (CI)}
+
+\subsubsection{Ideia base de CI}
+
+A continua integração é um processo onde o código é
+verificado para um repositório frequentemente.
+
+\begin{center}
+  \includegraphics[scale=0.55]{38}
+\end{center}
+
+\subsubsection{Poruque é que CI é crucial para DevOps?}
 
 \end{document}
