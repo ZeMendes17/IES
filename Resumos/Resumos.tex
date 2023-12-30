@@ -1473,6 +1473,333 @@ verificado para um repositório frequentemente.
   \includegraphics[scale=0.55]{38}
 \end{center}
 
+\pagebreak
+
 \subsubsection{Poruque é que CI é crucial para DevOps?}
+
+\begin{flushleft}
+  \textbf{Erros são encontrados mais cedo:}
+  \begin{itemize}
+    \item Se existe um erro na cópia local ou no código,
+    uma falha na build vai ocorrer no "estado apropriado";
+    \item Força o desenvolvedor a corrigir o bug antes de
+    proceder. Equipas QA (Quality Assurance) vão também beneficiar
+    disto, uma vez que estas vão trabalhar mais frequentemente em builds estáveis;
+  \end{itemize}
+
+  \textbf{Definir o estágio para CI/CD:}
+  \begin{itemize}
+    \item CI reduz interveenção manual, uma vez que a build,
+    sanidade e outros testes são supostamente executados automaticamente;
+    \item Isto permite uma entrega continua de sucesso
+  \end{itemize}
+
+  \textbf{Confidencialidade do Projeto}
+\end{flushleft}
+
+\subsubsection{Getting Started with CI}
+
+\begin{itemize}
+  \item \textbf{Build Script} (ex: Maven, Gradle, Ant, Make, \dots),
+  é um script, ou um conjunto de scripts, usados para compilar, testar,
+  inspecionar e dar deploy a um software;
+
+  \item \textbf{Version Control System} (ex: Git, GitHub, GitLab, \dots),
+  permite guardar todas as mudanças feitas a um ficheiro ou conjunto
+  de ficheiros ao longo do tempo, de modo a que seja possível
+  aceder a versões específicas mais tarde;
+
+  \item \textbf{CI Server} (ex: Jenkins, Travis CI, Hudson, \dots),
+  é um servidor que corre uma build de integração quando uma mudança
+  é commited num repositório de controlo de versões. Apesar de ser recomendado
+  correr uma build a cada mudança, buikds podem ser agendadas
+  (ex: nightly builds);
+
+  \item \textbf{Automation testing framework} (ex: Selenium, Appium,
+  TestComplete, \dots);
+\end{itemize}
+
+\subsubsection{Build Script com Maven}
+
+\vspace{2mm}
+
+\begin{center}
+  \includegraphics[scale=0.55]{39}
+\end{center}
+
+\pagebreak
+
+\subsubsection{CI Server com Jenkins}
+
+O \textbf{código é built} e testado quando um desenvolvedor
+faz um commit. Se o build for bem sucedida,
+\textbf{Jenkins faz deploy} da fonte para um servidor de testes
+e notifica a equipa de deployment.
+Se a build falhar, então o Jenkins vai notificar os erros
+à equipa de desenvolvimento.
+
+\begin{center}
+  \includegraphics[scale=0.55]{40}
+\end{center}
+
+\subsubsection{CI - Best Practices}
+
+\begin{flushleft}
+  \textbf{Versioning}
+  \begin{itemize}
+    \item Repositório partilhado para manter o código. Todos os
+    ficheiros donte são commited para o repositório;
+    \item Merge diário. As mudanças são commited para a mainline, diariamente;
+    \item Short-lived branches. É assim que devem ser, idealmente menos de uns dias
+    e nunca mais do que uma iteração;
+  \end{itemize}
+
+  \textbf{Build Configuration}
+  \begin{itemize}
+    \item Build independente. Escrever build scripts desacopolados de IDEs. Estes são executados pelo
+    sistema CI para que o software possa ser built a cada mudança;
+    \item Build em cada mudança. Building e testar software a cada mudança commited;
+    \item Limite de build. Falhar uma build quando uma regra do projeto é violada (ex: testes lentos);
+  \end{itemize}
+
+  \pagebreak
+
+  \textbf{Team Policy}
+  \begin{itemize}
+    \item Stop the line (build quebrada). Corrigir erros de entrega de software mal estes aconteçam;
+    \item Fazer commits regularmente. Cada membro da equipa deve verificar o "trunk", pelo menos uma vez por dia;
+    \item Feedback continuo. Enviar feedback automaticamente do sistema CI
+    para os membros da Cross-functional team;
+    \item Falhas rápidas. Falhar a build o mais rápido possível;
+    \item Builds rápidas. Uma build fornece feedback em problemas
+    comuns o mais rápido possível (normalmente menos de 10 minutos);
+  \end{itemize}
+\end{flushleft}
+
+\subsection{Entrega Contínua (CD)}
+
+A Engenharia de Software é baseada em \textbf{CI}. CI
+foca nas equipas de desenvolvimento, em que o output é o
+input do porcesso de testes manuais e o resto do processo
+de realease.
+
+Muito tempo pode ser "perdido" desta forma através de testes
+e operações (ex: testers esperam por "boas" builds de software
+equipas de operações esperam por documentação e fixes).
+
+\vspace{2mm}
+
+\textbf{CD} previne isto, as relações entre stakeholders
+involvidos na entrega é mais proxima e colaborativa (cultura DevOps).
+
+Automação extensiva a todas as partes do processo de entrega,
+CD pipeline.
+
+\subsubsection{CD Pipeline}
+
+\begin{center}
+  \includegraphics[scale=0.55]{41}
+\end{center}
+
+\begin{center}
+  \textbf{Vermelhos}: Fase de CI;
+  \textbf{Azuis}: Fase pós CI;
+  \textbf{Verdes}: Fase de CD;
+\end{center}
+
+\pagebreak
+
+\subsubsection*{Fase pós CI}
+
+Consiste de múltiplos ambientes/estágios com o objetivo de testar.
+Inclui testes \textbf{manuais e automaticos}.
+
+Alguns estágios podem ser executados em paralelo (ex: user
+acceptance testing (UAT) e performance testing em sistemas de backend).
+
+Estágios podem ser automaticamente executados quando o anterior
+termina ou é manualmente aprovado (ex: clicar um botão).
+
+\subsubsection*{Fase de CD}
+
+Novas versões estão disponíveis para os clientes.
+Existem várias estratégias e práticas para fazer isto:
+\begin{itemize}
+  \item eat your own dog food;
+  \item canary releases;
+  \item dark launches;
+  \item gradual rollouts;
+  \item A/B testing;
+  \item blue/green deployments;
+\end{itemize}
+
+\subsubsection{Eat your own dog food}
+
+\begin{flushleft}
+  \textbf{Ideia:} Os empregados utilizam a versão mais recente internamente.
+  Se tudo estiver como esperado, então a versão é lançada para os clientes.
+
+  \vspace{2mm}
+
+  "A companhia usa o seu próprio produto para testar e promover o produto".
+\end{flushleft}
+
+\subsubsection{Canary Releases}
+
+\begin{flushleft}
+  \textbf{Ideia:} Lançar uma nova versão para um subconjunto de utilizadores
+  primeiro, enquando o resto interage com a versão antiga estável.
+  Em cado de problemas com esta nova versão, \uline{apenas um pequeno
+  número de utilizadores é afetado}, logo o impacto do problema é reduzido. 
+
+  \vspace{2mm}
+
+  Canário é comparado à versão existente em termos do
+  conjunto dos critérios como estabilidade, performance, ou correção.
+  Os utilizadores são escolhidos com base na sua localização,
+  role (ex: admin, early, stable, \dots) e de forma aleatória
+  (ex: 1\% dos utilizadores).
+\end{flushleft}
+
+\subsubsection{Dark Launches}
+
+\begin{flushleft}
+  \textbf{Ideia:} Mitigar problemas de performance e de reliability
+  de novas funcionalidades ao enfrentar carga semelhante à de produção,
+  através de um lançamento em produção, \uline{sem ser visivel para os utilizadores}.
+
+  \vspace{2mm}
+
+  Dark launches são normalmente released para um \uline{grupo de
+  utilizadores que não sabem que estão a ser testados}. A nova funcionalidade
+  não lhes é indicada de qualquer maneira.
+
+  Dev teams podem identificar e corrigir os erros restantes.
+  Preocupações de escalabilidade antes de habilitar a funcionalidade para os utilizadores.
+\end{flushleft}
+
+\pagebreak
+
+\subsubsection{Gradual Rollouts}
+
+\begin{flushleft}
+  \textbf{Ideia:} \uline{Aumentar o número de users escolhidos}
+  para a nova versão de uma forma gradual, até substituir completamente
+  a versão antiga.
+
+  Mostra se a nova versão pode lidar com
+  aumentando a carga e se escala corretamente.
+
+  \vspace{2mm}
+
+  Muitas das vezes é combinada com \textbf{canary releases} e
+  \textbf{dark launches}.
+\end{flushleft}
+
+\begin{center}
+  \includegraphics[scale=0.4]{42}
+\end{center}
+
+\subsubsection{A/B Testing}
+
+\begin{flushleft}
+  \textbf{Ideia:} Comparar \uline{duas versões de software}
+  uma à outra, normalmente apenas diferencia num aspeto
+  testado, para determinar o efeito de uma dada mudança
+  \begin{itemize}
+    \item forma estatistica de testar hipoteses, pelo que
+    requerem amostras grandes o suficiente para ter "poder estatistico";
+    \item maioritariamente usado no UI para testar varios layouts ou
+    designs;
+  \end{itemize}
+\end{flushleft}
+
+\begin{center}
+  \includegraphics[scale=0.45]{43}
+\end{center}
+
+\subsubsection{Blue/Green Deployments}
+
+\begin{flushleft}
+  \textbf{Ideia:} ter dois ambientes de produção idênticos,
+  um hospedando a versão atual do software (green), versão estável,
+  a outra (blue) representa a nova versão.
+
+  \begin{itemize}
+    \item \uline{Release:} simplesmente mudar o roiter para que todo o tráfego
+    seja direcionado para o ambiente blue (ou green) e utilizar o
+    ambiente green (ou blue) para testar a nova versão;
+    \item \uline{Vantagens:} em caso de problemas depois da release,
+    um rápido rollback (switch) para a versão anterior é possível;
+    \item \uline{Obstaculo:} As bases de dados fazem parte de ambos
+    os ambientes, pelo que um switch requer uma migração de dados
+    / sincronização da base de dados;
+  \end{itemize}
+\end{flushleft}
+
+\begin{center}
+  \includegraphics[scale=0.5]{44}
+\end{center}
+
+\pagebreak
+
+\subsection{Beneficios de DevOps}
+
+\begin{flushleft}
+  \textbf{Velocidade}
+  \begin{itemize}
+    \item \textbf{Mover a elevada velocidade} de forma a inovar mais rápido
+    para os clientes, adaptar as mudanças nos mercados de forma melhor, e
+    crescer mais eficientemente em obter resultados de negócio;
+    \item Por exemplo, CD deixam as equipas ter ownership
+    dos serviços e depois dar release a updates para ser mais rápido;
+  \end{itemize}
+
+  \textbf{Fiabilidade}
+  \begin{itemize}
+    \item Garante a \textbf{qualidade dos updates da aplicação}
+    e as mudanças de infrastrutura para poder entregar fiavelmente
+    a um ritmo mais rápido, enquanto se mantém uma experiência
+    positiva para o cliente;
+    \item Usar práticas como \uline{CI e CD para testar cada alteração
+    é funcional e seguro};
+  \end{itemize}
+
+  \textbf{Escala}
+  \begin{itemize}
+    \item Automação e consistência \textbf{ajudam a gerir sistemas complexos
+    ou com mudanças frequentes} eficientemente e com risco reduzido;
+    \item Por exemplo, \uline{infrastruturas como código} ajuda a gerir
+    o desenvolvimento, testar, e ambientes de produção de forma
+    repetivel e mais eficiente;
+  \end{itemize}
+
+  \textbf{Melhora a colaboração}
+  \begin{itemize}
+    \item \textbf{As equipas de Dev e Ops} colaboram,
+    partilham muitos responsabilidades e combinam os seus workflows;
+    \item Isto reduz ineficiências e salva tempo, escrevendo código,
+    e a reduz a passagem de informação entre equipas;
+  \end{itemize}
+
+  \textbf{Segurança}
+  \item Mover rapidamente enquando mantém o controlo e preserva a conformidade;
+  \item Um pode adotar o modelo DevOps sem sacrificar a segurança através de
+  \textbf{politicas automaticas de compliance}, controlos fine-grained e
+  configuração de técnicas de gestão;
+  \item Por exemplo, usar infrastruturas como código (e politica como
+  código), podemos definir e depois rastrear a conformidade em escala;
+\end{flushleft}
+
+\pagebreak
+
+\subsection{DevOps - CALMS}
+
+DevOps não é puramente técnico, também inclui aspetos sumarizados
+pelo acrónimo \textbf{CALMS}:
+
+\begin{center}
+  \includegraphics[scale=0.6]{45}
+\end{center}
 
 \end{document}
