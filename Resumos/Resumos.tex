@@ -1802,4 +1802,378 @@ pelo acrónimo \textbf{CALMS}:
   \includegraphics[scale=0.6]{45}
 \end{center}
 
+\section{Clean Project}
+
+\subsection{Engenharia de Software - Rever}
+
+\begin{enumerate}
+  \item Processo de desenvolvimento de software
+  \begin{itemize}
+    \item Modelo sequencial (waterfall)
+    \item Modelo incremental
+    \item Modelo evolutivo/iterativo
+  \end{itemize}
+
+  \item Metodologias de desenvolvimento Agile
+  \begin{itemize}
+    \item Princípios Agile e gestão de projeto
+  \end{itemize}
+
+  \item DevOps, benefícios técnicos
+  \begin{itemize}
+    \item Entrega de software contínua
+    \item Entregas de features mais rápidas (time to market)
+  \end{itemize}
+\end{enumerate}
+
+\subsection{Papéis}
+
+\begin{center}
+  \includegraphics[scale=0.6]{46}
+\end{center}
+
+\pagebreak
+
+\subsubsection{Team Manager}
+
+\begin{itemize}
+  \item Modera as discussões (reuniões) da equipa. Promove a colaboração
+  dentro da equipa e toma iniciativa para resolver problemas;
+  \item Gere e atribui as tarefas;
+  \item Pode ser visto como um Scrum Master;
+  \item \textbf{Responsável por entregar os outcomes do projeto a tempo};
+\end{itemize}
+
+\subsubsection{Product Owner}
+
+\begin{itemize}
+  \item Representa os interesses dos stakeholders;
+  \item Sabe aquilo que a aplicação deve fazer (features, requisitos, user stories);
+  \item Responsável por aceitar os incrementos da solução. Deve rever novas releases;
+\end{itemize}
+
+\subsubsection{Architect}
+
+\begin{itemize}
+  \item Responsável pela arquitetura de software. Modelação da aplicação
+  e interações entre os componentes;
+  \item Sabe as tecnologias usadas: Frontend, Backend, Caching, Meassage Queues, \dots
+\end{itemize}
+
+\subsubsection{DevOps Master}
+
+\begin{itemize}
+  \item Responsável pela infrastrutura;
+  \item Garante a portabilidade do sistema;
+  \item Sabe tudo sobre: Deployment Machine, repositório Git,
+  Cloud Infrastructure, Operações de bases de dados, \dots
+\end{itemize}
+
+\subsection{Planeamento de Software}
+
+\begin{flushleft}
+  \textbf{Especificação:} Definir o que o sistema deve fazer;
+
+  \vspace{2mm}
+
+  \textbf{Design e Implementação:} Definir a organização do sistema
+  e implementar o sistema;
+  
+  \vspace{2mm}
+
+  \textbf{Validação:} Verificar que faz o que o cliente quer;
+
+  \vspace{2mm}
+
+  \textbf{Evolução:} Alterar o sistema como resposta à mudança
+  nas necessidades do cliente;
+\end{flushleft}
+
+\subsubsection{Especificação}
+
+\begin{itemize}
+  \item Definição dos requisitos e stories;
+  \item Ferramentas para gerir o desenvolvimento: Priorizar, atribuir,
+  e dar track ao trabalho;
+  \item Mas\dots Como fazemos isto? A resposta é utilizando ferramentas
+  de planeamento de projetos como o \textbf{Jira}, \textbf{Pivotal Tracker},
+  \textbf{GitHub} e \textbf{GitLab} (estes 2 últimos possuem repositório de código) 
+\end{itemize}
+
+\pagebreak
+
+\begin{center}
+  \includegraphics[scale=0.6]{47}
+\end{center}
+
+\subsubsection*{Workflow Overview}
+
+\begin{enumerate}
+  \item Escrever stories;
+  \item Priorizar stories;
+  \item Estimar stories;
+  \item Começar stories;
+  \item Acabar e entregar stories;
+  \item Testar stories;
+  \item Aceitar ou rejeitar stories;
+  \item As stories vão para o painel de "Done";
+\end{enumerate}
+
+\subsubsection*{GitHub}
+
+\begin{itemize}
+  \item É mais do que um repositório de código;
+  \item Tem funcionalidades de gestão de projetos
+  \begin{itemize}
+    \item Gestão de equipas;
+    \item Track de issues (podem seguir principios semelhantes a stories);
+  \end{itemize}
+  \item A comunidade cria novas apps de forma continua (para gestão personalizada);
+\end{itemize}
+
+\subsubsection*{GitHub Marketplace}
+
+Apps para integrar nos GitHub projects. Possiu diferentes categorias:
+Code review, continuous integration, security, testing, monitoring, \dots
+
+\pagebreak
+
+\subsubsection{Design e Implementação}
+
+Feature-branching workflow, com repositórios de código,
+utilizando Git como sistema de controlo de versões.
+
+\begin{center}
+  \includegraphics[scale=0.6]{48}
+\end{center}
+
+\subsubsection*{O que é um commit?}
+
+É uma operação fundamental para gravar mudanças no repositório.
+Um hash SHA-1 único é utilizado para identificar o commit.
+
+\vspace{2mm}
+
+\textbf{Inclui}: O conteúdo do ficheiro commited, a mensagem de commit, o
+nome e email do autor, o nome e email do commiter, timestamp
+e talvez mais\dots
+
+\subsubsection*{Commits diários}
+
+\begin{flushleft}
+  \textbf{Cenário}
+  \begin{itemize}
+    \item Trabalhar num projeto por duas semanas sem fazer um único commit;
+    \item O disco do computador decide morrer;
+    \item \textbf{E agora?}
+  \end{itemize}
+
+  Nunca se deve esperar que uma funcionalidade esteja completa
+  para fazer um commit. \textbf{Todos os dias}, deve-se fazer
+  \uline{commit} do trabaho e \uline{push} ao código para o repositório.
+\end{flushleft}
+
+\pagebreak
+
+\subsubsection*{Git Workflow}
+
+\begin{center}
+  \includegraphics[scale=0.6]{49}
+\end{center}
+
+\subsubsection*{Nova release}
+
+ \begin{itemize}
+  \item Preparar o produto para ser mostrado ao cliente, Fachando assim
+  um ciclo de desenvolvimento;
+  \item Checkout de um dev;
+  \item Quando a release está pronta: merge à release para a master e
+  merge da branch para o dev;
+ \end{itemize}
+
+ \begin{center}
+  \includegraphics[scale=0.6]{50}
+ \end{center}
+
+\pagebreak
+
+\subsubsection*{Hotfix}
+
+\begin{itemize}
+  \item Um bug catastrófico foi encontrado;
+  \item O que fazer?
+  \begin{itemize}
+    \item Checkout da master;
+    \item Corrigir o bug;
+    \item Merge para a master e a dev;
+  \end{itemize}
+  \item Normalmente não é preciso uma nova branch para uma release;
+\end{itemize}
+
+\begin{center}
+  \includegraphics[scale=0.6]{51}
+\end{center}
+
+\subsubsection*{Nova feature}
+
+\begin{itemize}
+  \item \textbf{Nova branch} para cada feature;
+  \item Checkout da dev;
+  \item Quando a feature está completa: merge da dev para a feature,
+  merge da branch para a dev;
+\end{itemize}
+
+\begin{center}
+  \includegraphics[scale=0.6]{52}
+\end{center}
+
+\subsubsection*{Pull/Merge Requests}
+
+\begin{itemize}
+  \item Dar merge a branches precisa de um pedido, normalmente para
+  proteger as branches (master e dev);
+  \item Um pull request precisa de aprovação, normalmente do manager
+  do git (DevOps Master);
+  \item Por vezes a implementação precisa de melhorias, como quando uma
+  feature não está completa ou conflitos complexos durante o merge;
+\end{itemize}
+
+\pagebreak
+
+\subsubsection{Merge Workflow}
+
+\begin{itemize}
+  \item Commit interlock (lock de commits);
+  \item Dificil de seguir o histórico de commits;
+\end{itemize}
+
+\begin{center}
+  \includegraphics[scale=0.6]{53}
+\end{center}
+
+\subsubsection{Rebase Workflow}
+
+\begin{itemize}
+  \item Não há interlock de commits;
+  \item É mais fácil de comunicar o histórico de commits;
+\end{itemize}
+
+\begin{center}
+  \includegraphics[scale=0.6]{54}
+\end{center}
+
+\subsubsection{Merge ou Rebase?}
+
+\begin{flushleft}
+  \textbf{Merge}
+  \begin{itemize}
+    \item \textbf{Vantagens:} Non-destructive, branches existentes não são
+    alterados de qualquer maneira, apenas temos um novo commit (fácil de reverter);
+    \item \textbf{Desvantagens:} Polui o histórico do repositório, torna dificil
+    de perceber a evolução;
+  \end{itemize}
+
+  \textbf{Rebase}
+  \begin{itemize}
+    \item \textbf{Vantagens:} Projeto muito mais limpo, com histórico do projeto linear;
+    \item \textbf{Desvantagens:} Fácil de fazer mal, reescrevendo o histórico, mais dificil de resolver conflitos;
+  \end{itemize}
+\end{flushleft}
+
+\pagebreak
+
+\subsubsection{Nomes das Branches}
+
+Cada programador gosta da sua própria convenção, no entanto estas convenções não
+são standards. O nome das branches é importante, como nomes bons para
+variáveis no código.
+
+\begin{center}
+  \includegraphics[scale=0.6]{55}
+\end{center}
+
+Por exemplo um URL dá redirect para a página errada, \#123:
+\begin{itemize}
+  \item bug/fixURLRedirect (bom)
+  \item bug/fix\_url\_redirect (também é bom)
+  \item bug/fix\_url\_redirect\_123 (melhor)
+\end{itemize}
+
+Se for para a página errada do perfil: bug/accounts/fix\_url\_redirect\_123
+
+\subsection{Troubleshooting}
+
+Dar merge a conflitos que são muito complexos:
+\begin{itemize}
+  \item Pedir ao developer para dar update à branch;
+  \item Dar merge à dev atual para a branch;
+\end{itemize}
+
+\vspace{2mm}
+
+Se dermos commit a dados sensíveis, é possível reverter mas pode ser perigoso.
+
+\vspace{2mm}
+
+Dependências: "It works on my machine".
+
+\subsection{Desenvolvimento baseado em contentores}
+
+\begin{itemize}
+  \item Uma boa solução para problemas de dependências;
+  \item Todos utilizam o mesmo ambiente;
+  \item Ambientes de produção e desenvolvimento são muito semelhantes;
+  \item Simplifica a integridade de diferentes serviços;
+  \item Fácil de dar deploy;
+\end{itemize}
+
+\pagebreak
+
+\subsubsection{Virtualização e Containerização}
+
+\begin{center}
+  \includegraphics[scale=0.6]{56}
+\end{center}
+
+\subsubsection{Docker}
+
+As imagens de produção e desenvolvimento são as mesmas, apenas possuem diferentes
+configurações. Em produção:
+\begin{itemize}
+  \item Utiliza-se \textbf{sempre} volumes para dados sensíveis;
+  \item Os containers morrem, mas os volumes não (normalmente);
+\end{itemize}
+
+\subsubsection{Imagens}
+
+\begin{itemize}
+  \item As imagens são baseadas em contentores;
+  \item Uma imagem pode servir múltiplos contentores, mas um contentor
+  só pode ser uma imagem;
+  \item Permite herança:
+  \begin{itemize}
+    \item FROM ubuntu:20.04
+    \item FROM myImage:base
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Docker Compose}
+
+\begin{itemize}
+  \item Simplifica a integração entre contentores;
+  \item Permite a orquestração de contentores, baseada numa certa ordem;
+  \item Não devemos alterar o ficheiro docker-compose.yml
+  \begin{itemize}
+    \item Em vez disso, devemos definir variavéis (.env);
+    \item Criar um ficheiro .env-example com as variavéis base;
+  \end{itemize}
+
+  \item Depois de toda a configuração, o startup é trivial: \textbf{docker-compose up -d}
+\end{itemize}
+
+\uline{Exemplo nos slides 45-54}
+
+\pagebreak
+
+
 \end{document}
