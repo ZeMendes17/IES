@@ -2175,5 +2175,410 @@ configurações. Em produção:
 
 \pagebreak
 
+\section{Padrões de Arquitetura Enterprise}
+
+A \textbf{Arquitetura} é o \textbf{conceito de mais alto nível} para
+os desenvolvedores experientes. Define-se como um \uline{Conhecimento
+partilhado} que descreve como o \textbf{sistema se divide em componentes}
+e como é que estes interagem entre si através de \uline{interfaces}.
+
+\begin{flushleft}
+  \textbf{Nota:} Diz-se \textbf{conhecimento partilhado} porque todos o
+  desenvolvedores do projeto devem ter noção da arquitetura.
+
+  Cada componente mais abstrato é composto por vários componentes mais
+  pequenos, mas se estes não forem do conhecimento/compreensão de todos os desenvolvedores,
+  então não fazem parte da arquitetura.
+\end{flushleft}
+
+\subsection{Decisões de Arquitetura}
+
+As \textbf{decisões arquiteturais} têm um \uline{grande impacto} na estrutura do projeto, pelo que implicam
+decisões bem pensadas e que nem sempre são fáceis de tomar.
+
+\vspace{2mm}
+
+Por exemplo, a decisão de desenvolver uma user interface \textbf{web-based}
+para a aplicação, ou a decisão de usar as java server  faces (JSF)
+como a \textbf{web framework}. A decisão em que os componentes devem estar
+\textbf{distribuídos} remotamente para uma maior escalabilidade, ou
+a decisão de usar \uline{REST} para \textbf{comunicar} entre componentes
+distribuidos.
+
+\vspace{2mm}
+
+Por isso, embora quando tomadas possam parecer demasiado óbvias e irrelevantes, \textbf{devem ser
+bem documentadas}, identificando as condições e restrições e analizando cada opção com
+base nas anteriores.
+
+\vspace{2mm}
+
+Caso contrário, pode acontecer o anti-pattern \textbf{Groundhog Day}, que
+diz que \uline{decisões arquiteturais importantes} que foram feitas
+são perdidas, esquecidas ou não são comunicadas de forma eficiente.
+Ninguém percebe \uline{o porquê da decisão ter sido feita}, continuando
+a ser discutida outra e outra e outra vez\dots
+
+
+\subsubsection{Justificar Decisões}
+
+\begin{enumerate}
+  \item Identificar as condições e restrições;
+  \item Analisar cada opção com base nas condições;
+  \item Tomar uma decisão;
+  \item Justificar a decisão;
+\end{enumerate}
+
+\subsection{Documentação e Comunicação}
+
+Desde cedo estabelecer onde as decisões arquiteturais serão documentadas
+e \textbf{ter a certeza que todos os membros da equipa sabem} onde
+ir para encontrar a informação. Num documento ou wiki, em vez de ter
+múltiplos ficheiros espalhados por uma drive partilhada que já tem
+muitos ficheiros. A documentação deve ser \textbf{centralizada}.
+
+\vspace{2mm}
+
+Soluções email-driven (horrível): as pessoas esquecem-se, perdem,
+ou não sabem que uma decisão de arquitetura foi tomada, logo, não implementam
+a arquitetura corretamente.
+
+\pagebreak
+
+\subsection{Evitar a Arquitetura \uline{Witches Brew}}
+
+As arquiteturas desenhadas por grupos resultam em ideias complexas
+todas misturadas e sem visão clara. O problema começa quando
+os membros da equipa começam a discutir ideias completamente
+diferentes, e a baralhar tudo.
+
+\vspace{2mm}
+
+É fundamental que a equipa recolha o melhor do \textbf{conhecimento coletivo} de forma a atingir uma
+solução comum e consensual, chegando a uma \uline{visão unificada
+para a arquitetura}. A arquitetura não deve por isso sem feita em pequenos grupos
+dentro da equipa, podendo nestes casos levar a uma mistura complexa de ideias sem uma
+visão clara do que deve efetivamente ser implementado.
+
+
+\subsection{Padrões de Arquitetura de Software}
+
+\subsubsection{Os mais simples}
+
+ \begin{flushleft}
+  \textbf{Cliente-Servidor} - Esta arquitetura consiste na relação
+  de um para um entre o cliente e o servidor (ex: aplicações online, email).
+
+  \begin{center}
+    \includegraphics[scale=0.6]{57}
+  \end{center}
+
+  \textbf{Master-Slave} - Semelhante à anterior no que toca ao número de
+  intervenientes na relação, mas distinta porque no servidor há um relacionamento
+  interno de um para muitos, master/slave. Por exemplo:
+  aplicações multi-threaded ou relplicações de bases de dados.
+
+  \begin{center}
+    \includegraphics[scale=0.6]{58}
+  \end{center}
+
+  \textbf{Pipe-filter} - É utilizada em processos que exisgem buffering
+  (começamos numa fonte de dados e acabamos num consumidor de dados, podendo utilizar
+  filtros pelo meio) ou sincronismo. Por exemplo: compiladores,
+  processos em cascata (streamed), buffering ou sync.
+
+  \begin{center}
+    \includegraphics[scale=0.6]{59}
+  \end{center}
+ \end{flushleft}
+
+\pagebreak
+
+\subsubsection{Arquitetura Microkernel}
+
+Tem por base dois componentes: a \textbf{core} application/system (estável) e os \textbf{plugins} (dinâmicos).
+Novas funcionalidades da aplicação são adicionadas como plugins, que são
+independentes do core, fornecendo extensibilidade, flexibilidade e
+isolamento e separação de funcionalidades da lógica da aplicação.
+
+\begin{center}
+  \includegraphics[scale=0.7]{60}
+\end{center}
+
+O \textbf{core system} geralmente providencia apenas as funcionalidades básicas
+e estritamente necessárias ao funcionamento do sistema. Deve ainda ter conhecimento
+dos plugins disponíveis e de como os obter (nome, contratos e protocolos de acesso).
+Pode ser integrado ou como parte de outro padrão de arquitetura. É uma boa
+primeira escolha para aplicações baseadas em produtos.
+
+\vspace{2mm}
+
+\begin{flushleft}
+  \textbf{Exemplo:} Os IDE fornecem um core system que depois é complementado
+  pelos plugins que lhe adicionam novas funcionalidades.
+\end{flushleft}
+
+\subsubsection{Arquitetura em camadas (Layered Architecture) (n-tier)}
+
+Este é o padrão arquitetural mais comum hoje em dia (standard para a
+maior parte das aplicações Java EE). Os seus componentes são baseados em
+camadas horizontais, cada uma com um papel específico na aplicação
+(separation of concerns).
+
+\begin{center}
+  \includegraphics[scale=0.55]{61}
+\end{center}
+
+A sua característica principal é a \textbf{separação de papéis} que cada camada
+desempenha, sendo este específico para cada uma, que lida apenas com a lógica adjacente a si mesma.
+Cada camada forma assim uma camada de \textbf{abstração}.
+
+É muito semelhante à organização estrutural encontrada em muitas
+empresas. É um padrão general-purpose sólido, fazendo com que seja
+um bom ponto de partida para a maioria das aplicações.
+
+\vspace{2mm}
+
+\begin{flushleft}
+  \textbf{Exemplo:} A camada de apresentação não precisa de saber como obter
+  os dados do user, tendo como única preocupação a forma como os vai apresentar,
+  a única lógica que implementa.
+\end{flushleft}
+
+\pagebreak
+
+\subsubsection{Arquitetura Event-Driven}
+
+Consiste num padrão de arquitetura \textbf{distribuida e assincrona}
+utilizado para cirar \uline{aplicações escaláveis}, também conhecido por
+\textbf{message-driven} ou \textbf{stream processing}. É composto por
+componentes individuais desacoplados que recebem e processam eventos
+assincronamente.
+
+\begin{center}
+  \includegraphics[scale=0.55]{62}
+\end{center}
+
+Este padrão é relativamente \textbf{complexo} de implementar, principalmente
+devido à sua natureza assincrona distribuida. \textbf{Falta de transações
+atomicas} para apenas um proceso de negócio:
+\begin{itemize}
+  \item Os componentes do processamento de componentes são altamente
+  desacoplados e distribuidos;
+  \item É muito dificil de manter uma unidade transacional de trabalho
+  através de todos os componentes;
+\end{itemize}
+
+Um aspeto chave é a \textbf{criação, manutenção e governação} dos contratos
+dos componentes processadores de eventos. Útil em eventos com
+várias etapars e que necessitam de orquestração para serem processados.
+
+\vspace{2mm}
+
+\begin{flushleft}
+  \textbf{Exemplo:} Suponhamos que uma pessoa muda de casa e informa a sua
+  seguradora, através de um evento relocation. Os passos envolvidos no seu processamento estão contidos num event
+  broker, como mostrado na figura acima, que por cada passo vai criar um processing event, que é depois enviado
+  para o canal correspondente, onde será processado pelo seu event consumer. O processo continua até que todos os
+  passos estejam concluídos.
+\end{flushleft}
+
+\subsubsection{Arquitetura Orientada a Serviços (SOA)}
+
+\begin{center}
+  \includegraphics[scale=0.55]{63}
+\end{center}
+
+\pagebreak
+
+Esta arquitetura tem como objetivo desenvolver serviços distribuídos cujos
+componentes são serviços standalone e podem ser utilizados por outros
+como serviços prontos a consumir (não como bibliotecas).
+
+\begin{center}
+  \includegraphics[scale=0.55]{64}
+\end{center}
+
+As características chave deste tipo de arquitetura são: \textbf{contratos standardizados de serviços},
+\textbf{independente da linguagem}, \textbf{baixo acoplamento}, \textbf{reutilização}
+e \textbf{autonomia}.
+
+\vspace{2mm}
+
+\begin{flushleft}
+  \textbf{Exemplo:} Na UA o sistema de autenticação é utilizado por todos os serviços associados ao ensino. Foi desenvolvido
+  como um componente standalone e é utilizado por outros serviços como um serviço (neste caso de auntenticação)
+  como o PACO, o Elearning, o site do NEI\dots
+\end{flushleft}
+
+POde ainda ser adicionada uma camada de \textbf{abstração} quando
+há vários componentes para o mesmo serviço com um servige registry.
+Este é contactado pelo cliente para saber qual componente está disponível.
+
+\begin{flushleft}
+  \textbf{Exemplo:} Na  UA podiam existir vários sistemas de impressão que trabalhavam de forma complementar para
+  aumentar a redundância. Quando queríamos imprimir contactavamos o registo dos serviços que nos dizia qual o
+  sistema que estava disponível, para o qual era enviado o pedido de impresão.  
+\end{flushleft}
+
+\subsubsection*{SOAP (Simple Object Access Protocol)}
+
+Este é um protocolo baseado em XML que foi pioneiro na definição de comunicação
+entre aplicações, independentemente da plataforma linguagem de programação em que
+são desenvolvidos.
+
+\textbf{Serviços Web baseados em SOAP/WSDL:} Por ser uma solução muito abrangente e demasiado estandardizada
+(tem estrutura pré-definida) foi considerada demasiado pesada e
+pouco eficiente.
+
+\begin{center}
+  \includegraphics[scale=0.38]{65}
+\end{center}
+
+\pagebreak
+
+\subsubsection*{REST (Representational State Transfer)}
+
+Para simplificar as comunicações foi criado o REST, que com menos
+estandardização torna a \uline{comunicação entre processos mais simples}.
+É um estilo arquitetural baseado na \textbf{transferência de representações
+de recursos} de um servidor para um cliente. É \textbf{bem mais simples}
+do que SOAP/WSDL para implementadar serviços web.
+
+Os serviços RESTful involvem uma carga (overhead) mais pequena do que
+as chamadas "big web services".
+
+\vspace{2mm}
+
+Tem por base a utilização de \textbf{endpoints HTTP}, através de pedidos
+GET, POST, DELETE, PUT, através dos quais são trocadas mensagens em formato
+JSON. Fornece uma forma de comunicação sem estado, mais simples e
+mais leve.
+
+\vspace{2mm}
+
+Um elemento fundamental nesta arquitetura são os \textbf{recursos}
+(catálogo, registo médico ou documentos, \dots) (múltiplas representações,
+podendo existir em formatos diferentes (JSON, TXT, \dots)) sobre os quais são feitas as operações CRUD
+(Create, Read, Update, Delete).
+
+\begin{center}
+  \includegraphics[scale=0.4]{66}
+\end{center}
+
+\begin{flushleft}
+  \textbf{Nota:} O create é feito pedido pedido POST, o read pelo GET, o update pelo PUT e o delete pelo DELETE.
+\end{flushleft}
+
+Aprensenta no entanto algumas desvantagens, nomeadamente a
+\textbf{dificuldade em representar recursos/interfaces complexas},
+a \textbf{necessidade de documentar} as interfacees para as entender, uma vez que não
+existe descrição standard, e ainda a \textbf{necessidade de implementar
+sistemas adicionais} para monitorizar e gerir a qualidade de
+um serviço e a fiabilidade do serviço (ex: REST não
+coloca qualuqer tipo de segurança como o SOAP).
+
+\subsubsection*{Topologia SOA}
+
+Esta arquitetura era inicialmente para desenvolver aplicações
+monolíticas, mas evoluiu a partir de então. Muitas organizações
+utilizam o SOA para resolver complexidades de integração, através
+de \textbf{Enterprise Service Bus (ESB)} (middleware de mensagens).
+
+\pagebreak
+
+\begin{center}
+  \includegraphics[scale=0.4]{67}
+  \includegraphics[scale=0.4]{68}
+\end{center}
+
+Algumas caracteríscas chave do \textbf{ESB} são:
+desenvolvimento streamlined, suporta várias estratégias de binding,
+realiza várias trasformações dos dados, routing inteligente, monitorização em
+tempo real, tratamento de exceções e serviço de segurança.
+
+\subsubsection{Arquitetura de Microserviços}
+
+Este padrão evoluiu de \textbf{2 fontes principais}:
+\begin{itemize}
+  \item aplicações desenvolvidas ustilizadno o padrão por camadas;
+  \item aplicações distribuidas desenvolvidas utilizando uma arquitetura orientada a serviços (SOA);
+\end{itemize}
+Procura simplificar o seu desenvolvimento através da sua divisão em pequenos serviços.
+
+\vspace{2mm}
+
+O principal conceito deste padrão é a noção de \textbf{deploy de unidades
+separadas}. Estas unidades são componentes que prestam um serviço (deployed
+como uma unidade separada) e
+podem consistir num pequeno módulo ou numa grande porção da
+aplicação. Permitem uma deployment mais fácil e desacoplamento.
+
+\vspace{2mm}
+
+Em qualquer um dos cenários deve ser assegurada uma \textbf{arquitetura
+distribuída}, para a qual é fundamental o desacoplamento total entre os
+componentes e a definição do seu protocolo de acesso (REST, SOAP, JMS,
+…). \uline{O grande desafio é atingir o grau certo de granularidade}.
+
+\begin{flushleft}
+  \textbf{Nota:} Se for necessário orquestrar ou passar mensagens entre os componentes na camada da interface ou API, então o
+  serviço está demasido granulado. Caso esta não consiga ser reduzida (ou seja, por mais que tentemos a orquestração
+  não deixa de ser necessária), então este não será o padrão adequado para desenvolver a nossa aplicação.
+\end{flushleft}
+
+\begin{center}
+  \includegraphics[scale=0.5]{69}
+\end{center}
+
+As aplicações são geralmente \uline{mais robustas}, \uline{fornece melhor escalabilidade}, e \uline{pode
+suportar mais facilmente a entrega continua}. A capacidade de realizar
+deployments de produção em real-time. Apenas os componentes do serviço
+que mudam precisam de ser deployed.
+
+
+\pagebreak
+
+
+\subsubsection*{SOA vs Microservices}
+
+\begin{center}
+  \includegraphics[scale=0.5]{70}
+\end{center}
+
+\subsubsection{Arquitetura Space-Based}
+
+A maioria das aplicações web gere os pedidos num Fluxo
+servidor $\rightarrow$ aplicação $\rightarrow$ base de dados,
+fornecendo uma resposta em tempo útil para um fluxo notmal de acesso.
+No entanto, quando \uline{o fluxo começa a crescer começamos a assistir
+a um aumento do contrangimento do tráfego}. Inicialmente no servidor, que pode ser expandido facilmente e
+sem grandes custos, mas que faz com que se comecem a sentir limitações na aplicação, esta
+mais difícil e cara para expandir e por fim na base de dados, que também requere um grande
+investimento para a sua expansão.
+
+\vspace{2mm}
+
+A \textbf{space-based architecture}, também conhecido por \textbf{cloud architecture} procura então resolver
+os problemas de \textbf{escalabilidade e concorrência}, consistindo numa melhor alternativa à de tentar
+escalar os elementos do referido fluxo. É uma boa escolha para aplicações
+com load variavel (ex: redes sociais, sites de leilão, \dots).
+
+\begin{center}
+  \includegraphics[scale=0.5]{71}
+\end{center}
+
+O nome deste padrão vem do conceito de \textbf{tuple space}, um paradigma de memória partilhada
+distribuída que implementa através da remoção da base de dados central, criando uma rede
+de dados replicada em memória.
+
+\vspace{2mm}
+
+Cada \textbf{unidade de processamento} vai então ter uma cópia da base de dados, pelo que estas
+podem ser inicializadas e desligadas dinâmicamente de acordo com a variação do tráfego de
+acesso.
+
+\pagebreak
+
 
 \end{document}
