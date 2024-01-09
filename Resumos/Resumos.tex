@@ -2580,5 +2580,248 @@ acesso.
 
 \pagebreak
 
+\section{Web Frameworks - Spring}
+
+Até há uns anos atrás, os programas corriam apenas localmente nos computadores.
+Hoje em dia é muito diferente, as aplicações web têm um papel central nas
+aplicações que utilizamos diariamente.
+
+\vspace{2mm}
+
+As páginas web evoluiram de versões \textbf{estáticas}, que
+retornam conteúdos hardcoded armazenado no servidor quando um
+recurso particular é requisitado.
+
+\begin{center}
+  \includegraphics[scale=0.45]{72}
+\end{center}
+
+Nas \textbf{dinâmicas}, o conteúdo das páginas é gerado dinamicamente,
+apenas quando necessário, normalmente introduzindo informação de bases
+de dados em templates HTML.
+
+\begin{center}
+  \includegraphics[scale=0.45]{73}
+\end{center}
+
+Um site dinâmico pode retornar dados diferentes para um URL,
+baseado na informação fornecida pelo user ou preferências
+armazenadas e pode realizar outras operações como parte de
+retornar uma resposta (ex:  mandar notificações).
+
+\vspace{2mm}
+
+A maior parte do código que suporta o website dinâmico corre num servidor
+web. Criar este código é conhecido como \textbf{server-side} programming
+ou \textbf{backend} programming.
+
+\vspace{2mm}
+
+Para que serve o \textbf{backend}? Como sabemos, os programas executam
+código binário, e também texto (linguagens interpretadas),
+mas o browser não consegue entender binário, apenas HTML
+e alguns outros scripts (ex: JavaScript). O backend
+terá como função gerar (ou obter de uma base de dados) dados
+e enviar para o clent-side (browser) em HTML.
+
+\subsection{Frameworks}
+
+Nos anos 2000 começaram a surgir finalmente as frameworks, que quer sejam focadas no lado
+do servidor ou do cliente, são um \textbf{design reutilizável} de todas
+as partes do sistema que é representado por um conjunto de classes
+abstratas e na forma que as suas intâncias interagem (estrutura).
+Fornecem um \textbf{esqueleto} de uma aplicação, que pode ser
+\textbf{customizado} pelo programador.
+
+\pagebreak
+
+\begin{flushleft}
+  \textbf{Exemplo:} A framework \textbf{Spring} permite gerar o esqueleto
+  para um projeto Maven e com alguns cliques no Spring Initializr ter
+  uma aplicação a dar Hello World sem ter de escrever qualquer linha de código.
+
+  Desta forma evita a "reinvenção da roda", evitando a escrita  do código comum
+  a vários proejtos cada vez que se cria um novo.
+\end{flushleft}
+
+Uma framework fornece uma fundação de software genérica, sobre a qual
+\textbf{código personalizado específico par a aplicação} pode ser secrito.
+Normalmente incluem múltiplas bibliotecas, juntamente com ferramentas e
+regras de como estruturar e usar os componentes.
+
+\vspace{2mm}
+
+As frameworks diferem de classes de outras bibliotecas através da reutilização
+do design de alto nível.
+\begin{itemize}
+  \item \textbf{As bibliotecas são usadas pelo código especifico
+  da aplicação} para suportar funcionalidades específicas;
+  \item \textbf{As frameworks controlam o flow da aplicação}
+  e chamam o código específico da aplicação;
+\end{itemize}
+
+\subsubsection*{Frameworks e Bibliotecas}
+
+\begin{flushleft}
+  \textbf{Bibliotecas:} Chamam as funções na API para fazerem coisas por nós;
+
+  \vspace{2mm}
+
+  \textbf{Frameworks:} "Don't call us, we'll call you", containers
+  de inversão de controlo;
+\end{flushleft}
+
+\begin{center}
+  \includegraphics[scale=0.6]{74}
+\end{center}
+
+\subsubsection{Vantagens}
+
+\begin{itemize}
+  \item Poderosas e complexas;
+  \item Velocidade de implementação;
+  \item Soluções testadas e comprovadas;
+  \item Acesso a soluções off-the-shelf;
+  \item Manutenção (updates,\dots);
+\end{itemize}
+
+\subsubsection{Desvantagens}
+
+\begin{itemize}
+  \item Dificil de aprender;
+  \item Performance mais baixa;
+  \item Independência reduzida;
+  \item Dependência de entidades externas;
+  \item Lock-in tecnológico;
+\end{itemize}
+
+\pagebreak
+
+\subsection{Client-Side Frameworks (Frontend)}
+
+As mais utilizadas são o \textbf{Angular}, \textbf{React} e \textbf{Vue.js} e permitem vérias funcionalidades.
+\begin{itemize}
+  \item \textbf{Manipulação de documentos} carregados pelo browser -
+  O DOM (Document Object Model) permite a manipulação de um documento junto com HTML e CSS;
+
+  \item \textbf{Atualizar dados (Fetch)} - Através de chamadas assíncronas ao
+  servidor (ex: AJAX);
+
+  \item \textbf{Desenhando e manipulando gráficos} - complexo com desenho no navegador;
+  \item \textbf{Armazenamento Client-Side} - através de "bases de dados" locais
+  (ex: IndexedDB)
+\end{itemize}
+
+\subsection{Server-Side Frameworks (Backend)}
+
+\begin{flushleft}
+  \textbf{Componentes Core:}
+  \begin{itemize}
+    \item \textbf{Request Routing} - Faz a ligação entre os HTTP requests e o código;
+    \item \textbf{Data Access} - Acesso a dados uniforme, mapeamento e configuração;
+    \item \textbf{Template Engine} - Estruturar e separar a apresentação da lógica; 
+  \end{itemize}
+
+  \textbf{Componentes Comuns:}
+  \begin{itemize}
+    \item \textbf{Security} - Proteção contra ataques web comuns;
+    \item \textbf{Sessions} - GEstão de sessões e configurações;
+    \item \textbf{Error Handling} - Capturar e gerir erros ao nível da aplicação;
+    \item \textbf{Scaffolding} - Gerar interfaces de CRUD rapidamente, baseadas em
+    modelos de dados;
+  \end{itemize}
+
+  \textbf{Por exemplo, em SpringBoot, O Request Routing é feito utilizando
+  RequestMapping}
+\end{flushleft}
+
+\subsubsection{Acesso aos Dados}
+
+\begin{flushleft}
+  \textbf{Independência Lógica:} A habilidade de alterar o esquema lógico sem
+  alterar o esquema externo ou programmas de aplicação
+  \begin{itemize}
+    \item Pode adicionar novos campos, novas tabelas, sem alterar as views;
+    \item Pode alterar estruturas de tabeas sem alterar as views;
+  \end{itemize}
+
+  \textbf{Independência Física:} A habilidade de alterar o esquema físico
+  sem alterar o esquema lógico
+  \begin{itemize}
+    \item O tamanho do armazenamento pode mudar;
+    \item O tipo de alguns dados pode mudar para razões de otimização;
+  \end{itemize}
+
+  \textbf{Solução:} Manter a \textbf{VIEW} (o que o user vê) independente do
+  \textbf{MODEL} (domínio do conhecimento).
+\end{flushleft}
+
+\pagebreak
+
+\subsubsection*{Model-View-Controller (MVC)}
+
+Muitas frameworks de backend seguem, ou são uma evolução de um padrão de
+design chamado \textbf{Model-View-Controller (MVC)}.
+\begin{itemize}
+  \item Separa a funcionalidade core da apresentação  e controlo da lógica
+  que utiliza esta funcionalidade;
+  \item Permite que múltiplas views partilhem o mesmo modelo de dados;
+  \item Torna suportar múltiplos clientes mais fácil de implementar, testar
+  e manter; 
+\end{itemize}
+
+\begin{center}
+  \includegraphics[scale=0.7]{75}
+\end{center}
+
+\begin{flushleft}
+  \textbf{Model:} Representação por parte do programa do objeto/base de dados (Users, Products, Cars,\dots);
+  
+  \textbf{View:} A representação visual dos dados. É aquilo que o user
+  da web app vê (HTML, CSS, JavaScript);
+
+  \textbf{Controller:} É o go-between entre o Model e a View.
+  \begin{itemize}
+    \item One way: pega no input da View e dá a ao Model
+    para este poder agir;
+    \item Other way: Vai buscar os dados dos Model(s) e dá os à View
+    para incorporar na representação visual;
+    \item \textbf{Exemplo:} Novo signup de um user, listas de produtos
+    que são menos do que 10€, redireciona o user.
+  \end{itemize}
+
+  \subsubsection{Template Engine}
+
+  As Template Engines pegam nas strings tokenizadas e produzem
+  rendered strings com valores nos locais do token como output.
+  Estes templates são tipicamente usados como um formato imediato por
+  desenvolvedores para, programaticamente, produzir um ou mais
+  output formats desejados. Normalmente, HTML, XML ou PDF (ex:
+  Java Server Pages, Thymeleaf).
+\end{flushleft}
+
+\pagebreak
+
+\subsection{Spring Framework}
+
+\begin{itemize}
+  \item Arquitetura
+  \item Anotações
+  \item Inversion of Control (IoC)
+  \item Dependency Injection (DI)
+  \item Beans
+  \item Aspect-Oriented Programming (AOP)
+\end{itemize}
+
+Spring não foi a primeira framework a tentar resolver os problemas
+relacionados com a contrução de aplicações empresariais em Java.
+\textbf{J2EE ou Java EE (Enterprise Edition)} que deu origem
+ao Spring tentou fazer a mesma coisa, fornece uma boa separação
+entre várias partes da aplicação.
+
+No ínicio dos anos 2000, surgiu a \textbf{Spring Framework},
+desde então, cresceu de ser um (já sofisticado) \uline{cointainer de
+injeção de dependências} para um \textbf{ecosistema de frameworks
+que cobre vários casos de uso} no desenvolvimento de uma aplicação.
 
 \end{document}
