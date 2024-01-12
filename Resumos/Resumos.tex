@@ -3251,12 +3251,275 @@ entanto ser definidos métodos adicionais para queries mais complexos.
   \includegraphics[scale=0.5]{93}
 \end{center}
 
+Os métodos adicionais têm de seguir as convenções impostas pelo Spring Boot, uma vez que continuam a ser
+configurados automaticamente.
 
+No exemplo acima, apesar de não ser um método fornecido por defeito, o findByEmail(String email) tem de ser
+declarado desta forma, uma vez que o Spring Boot vai procurar na classe Employee pelo atributo com o nome que
+segue "findBy" e se esse nome não existir, dará erro.
 
+Spring Data JPA suporta \textbf{find, read, query, count, get},
+por exemplo, podemos fazer queryByName e o Spring Data
+teria se comportado da mesma forma.
 
+Também podemos usar \textbf{Distinct}, \textbf{Top}, \textbf{First} para remover duplicados,
+ou limitar o result set: \uline{findTop3ByFirstName(String firstName)}.
 
+\pagebreak
 
+O \textbf{controlador}, para além de anotado como tal através da anotação
+@RestController, é também mapeado para um determinado caminho na
+aplicação com @RequestMapping(“/api”). 
 
+Cada um dos seus métodos é também mapeado para um caminho relativo ao anterior, com
+@GetMapping(“/abc”). Os seus parâmetros são anotados com @RequestParam(required=X) no
+caso de serem enviados através do URL ou @RequestBody no caso de serem enviados no
+corpo do pedido HTTP.
 
+\begin{center}
+  \includegraphics[scale=0.5]{94}
+  \includegraphics[scale=0.5]{95}
+\end{center}
+
+A anotação dos métodos varia dependendo do pedido HTTP a que respondem, podendo ser por exemplo
+PostMapping, PutMapping\dots
+
+\vspace{2mm}
+Definidos o modelo dos dados, a interface dos seus repositórios e o
+controlador que os manipula, falta apenas definir a \textbf{ligação da aplicação à
+base de dados}.
+
+Para terminar o cenário de configuração, podemos usar a
+base de dados H2 embutida, basta colocar as suas dependendências
+no ficheiro \textbf{pom.xml} e configurar o ficheiro \textbf{application.properties}
+com as propriedades da base de dados:
+
+\begin{center}
+  \includegraphics[scale=0.6]{96}
+\end{center}
+
+A definição dos dados de conexão à base de dados é feita no ficherio application.properties de forma a desacoplá-la
+do código. Assim, quando houver necessidade de alterar o end point da base de dados, basta editar este ficheiro, sem
+necessidade de fazer qualquer alteração e recompilar o código.
+
+\vspace{2mm}
+
+Por fim, a aplicação pode ser \textbf{executada} facilmente, dado o facto de incorporar um servidor
+HTTP embutido.
+
+\begin{lstlisting}
+  $ mvn spring-boot:run
+\end{lstlisting}
+
+\subsection{Spring WebFlux Framework}
+
+Uma nova web framework \textbf{reativa} (uma versão paralela
+da Spring MVC, introduzido na versão 5.0), é um modelo \textbf{assíncrono},
+em que o sistema \textbf{não bloqueia} à espera de resposta, e implemanta
+a especificação Reactive Streams (Reactor lib). Esta especificação
+serve para sistemas onde muitos eventos são gerados e consumidos
+assincronamente. Existem duas versões: funcional e baseada em anotações.
+A última é bastante parecida com a Spring MVC.
+
+Permite que uma página seja refrescada continuamente sem ter uma resposta da base de dados para um determinado
+pedido que foi feito.
+
+\begin{center}
+  \includegraphics[scale=0.55]{97}
+  \includegraphics[scale=0.55]{98}
+\end{center}
+
+\subsubsection{Spring MVC vs Spring WebFlux}
+
+O MVC é mais utilizado com bases de dados relacionais, enquanto que o WebFlux com NoSQL.
+
+\begin{center}
+  \includegraphics[scale=0.4]{99}
+\end{center}
+
+\subsection{Spring Data}
+
+Este é o módulo que permite a gestão dos dados de uma forma abstrata, permitindo a
+utilização da grande maioria dos tipos de bases de dados, relacionais e não relacionais.
+
+\vspace{2mm}
+
+Para obter percistência dos dados, esta possuí 4 camadas:
+Persistence Layer (Controllers), Business Layer (Services),
+Persistence Layer (Repositories), Database Layer (Database (SQL ou NoSQL)).
+
+\pagebreak
+
+\subsubsection{DAO (Data Access Object)}
+
+Padrão estrutural que isola as camadas de apresentação e negócio
+da camada de persistência utilizando \textbf{uma API abstrata}.
+Não é um um módulo Spring, mas sim convenções
+que devem ditar escrever DAO.
+
+\begin{center}
+  \includegraphics[scale=0.6]{100}
+\end{center}
+
+\subsubsection{ORM (Object Relational Mapping)}
+
+O pacote ORM está relacionado com o acesso à base de dados. Fornece
+\textbf{camadas de integração para API's de mapeamento objeto-relacional populares
+como JDO e Hibernate}.
+
+Com base nestes dois conceitos foram criados vários projetos, para diferentes tipos de
+utilização.
+
+\subsubsection*{Java/Jakarta Persistence API (JPA)}
+
+É a especificação padrão para mapear objetos Java a bases de dados
+relacionais. É uma abordagem possível para \textbf{ORM}.
+Sendo uma especificação, é utilizado em várias implementações como
+o Hibernate.
+
+\subsubsection*{Hibernate}
+
+É uma ferramenta \textbf{ORM} baseada em Java que fornece um framework
+para mapear um objeto orientado a objetos para uma tabela na base de dados
+e vice-versa. É uma implementação do \textbf{JPA}.
+
+\subsubsection*{Spring Data Persistence}
+
+É um projeto que fornece uma abordagem unificada para a persistência
+de dados, independentemente do tipo de armazenamento de dados,
+relacional ou não relacional.
+
+\begin{center}
+  \includegraphics[scale=0.5]{101}
+\end{center}
+
+\subsubsection*{Spring Data JPA}
+
+Uma \textbf{abstração} utilizada para reduzir significativamente
+a quantidade de código de implementação necessário para implementar
+camadas de acesso a dados. Adiciona as próprias funcionalidades
+como \textbf{mplementação de repositórios sem código} e \textbf{criação de queries de base de ddos a partir dos nomes}.
+Pode também gerar queries JPA através das convenções de nomes.
+
+\pagebreak
+
+É novamente uma especificação que é implementada pelo \textbf{Hibernate}, associado ao projeto
+através da dependência spring-boot-starter-jpa.
+
+Temos de criar um repositório que extende a interface JpaRepository,
+tendo assim acesso as anotações @Query, @Procedure (para chamar stored procedures),
+@Lock e @Modifying.
+
+\vspace{2mm}
+
+O Spring Boot pode fazer a configuração de bases de dados mais simples, como a H2, uma BD in-memory.
+
+Para \textbf{mapear uma classe na base de dados}, basta anotá-la com @Entity e eventualmente @Table para definir
+qual a tabela onde os seus objetos serão armazenados. Cada um dos seus atributos pode ser mapeado com
+@Id e @GeneratedValue, para especificar uma chave primária com uma determinada estratégia de geração
+automática, e @Column para mapear atributos para colunas especificas da tabela.
+
+A \textbf{ligação entre classes} é feita através da anotação @Embedded. Adicionalmente o atributo pode ser anotado
+com @AttributeOverride(s) para fazer o mapeamento entre os atributos da sua classe e as colunas para as quais estes
+vão ser mapeados.
+
+As \textbf{relações entre classes} são anotadas com @OneToOne ou @OneToMany para referenciar entidades, @OneToMany
+ou @ManyToMany para referenciar conjuntos de entidades e @MappedSuperClass ou @Inheritance para herança entre
+entidades.
+
+Para fazer queries personalizados, pode ser utilizada a anotação @Query, que permite a escrita de código SQL ou
+JPQL (JPA Query Language), com funcionalidades de ordenação e até paginação.
+
+\begin{center}
+  \includegraphics[scale=0.8]{102}
+\end{center}
+
+\subsubsection*{JPA com MongoDB}
+
+Para além de suportar bases de dados relacionais, tem muitos drivers para outros tipos de BD,
+como o MongoDB. Estes por vezes apresentam ligeiras alterações no modelo, mas de um
+modo geral, este é bastante semelhante.
+
+\begin{center}
+  \includegraphics[scale=0.8]{103}
+\end{center}
+
+No exemplo acima vemos uma ligeira adaptação, com a anotação @Document em vez de @Table,
+@Field em vez de @Column e a criação de um
+MongoRepository em vez de um JPARepository. No entanto, de resto a sintaxe é bastante semelhante e no fim vamos
+ter a mesma interface no repositório com os queries CRUD disponíveis sem necessidade de os definir.
+
+\pagebreak
+
+\section{Microservices}
+
+Nos últimos anos, o paradigma de desenvolvimento de aplicações alterou-se de um modelo
+focado em armazenamento local (seja no desktop ou em servidores), para um baseado na
+nuvem, sendo hoje estes dois conceitos altamente interligados.
+
+Vários fatores levaram ao conceito de aplicações "cloud native":
+a disponibilidade geral de \textbf{plataformas de cloud computing},
+o avanço nas \textbf{técnoogias de virtualização} e o aparecimento
+de \textbf{práticas agile e DevOps}, uma vez que as organizações
+procuram formas de simplificar e encurtar os ciclos de release.
+
+\begin{flushleft}
+  \textbf{Micro-serviços} definem-se então como aplicações nativas da nuvem, compostas por peças
+  pequenas, independentes, self-contained, substituíveis e poliglotas.
+\end{flushleft}
+
+Os ambientes de cloud computing são \textbf{dinamicos}, com
+\uline{alocação on-demand e libertação de recursos} de uma pool
+de recursos virtualizados partilhados.
+
+Aplicações ou serviços (micro-serviços) são \textbf{pouco acoplados},
+com dependências explicitas descritas.
+Aplicações e processos são \textbf{corridos em containers de software}
+como unidades isoladas. Os porcessos são geridos utilizando processos de
+\textbf{orquestração central} de forma a melhorar a utilização de recursos
+e reduzir custos de manutenção.
+
+\subsection{Boas práticas no desenvolvimento}
+
+No desenvolvimento deste tipo de serviços, há um conjunto de boas práticas que deve ser
+seguido. São 12, mas destacam-se as principais. (3, 8 e 10 mais importantes).
+Designa-se por \textbf{12-factor application methodology} e não são especificas
+do cloud provider, plataforma ou linguagem, são apenas um conjunto de
+boas práticas para \uline{aplicações portáveis e resilientes} (especialmente
+aplicações SaaS).
+
+\begin{enumerate}
+  \item \textbf{Codebase:} Deve haver uma associação de um para um entre cada serviço e o seu repositório de código,
+  usando um sistema de versionamento de código, como o Git. Mas uma mesma base de código pode conter vários serviços;
+  \item \textbf{Dependencies:} Os serviços devem declarar todas as suas dependências (não deve ser assumida a presença de
+  ferramentas ou bibliotecas do sistema). Podemos usar Maven para Java, Pip para Python e NPM para Node.js;
+  \item \textbf{Configurations:} As configurações que variem entre ambientes de execução devem ser armazenadas no ambiente (por
+  exemplo variáveis de ambiente). Por exemplo, em Spring Boot, as \uline{dependências} são declaradas no ficheiro pom.xml e as
+  \uline{configurações} no ficheiro application.properties;
+  \item \textbf{Backing services:} Todos os seviços de armazenamento são tratados como attached resources e devem ser desacoplados do serviço, sendo possível que
+  este funcione sem o primeiro, ou que seja facilmente substituído por outro. Estes serviços
+  são geridos (attached, detached) pelo \textbf{ambiente de execução};
+  \item \textbf{Build, release, run:} O processo de desenvolvimento deve distinguir e separar as fases de \textbf{construção}, \textbf{entrega} e \textbf{execução};
+  \item \textbf{Processes:} As aplicações devem ser executadas como um ou mais \textbf{processos} independentes (stateless).
+  Os dados persistentes devem ser armazenados num serviço de armazenamento apropriado;
+  Por exemplo uma aplicação que seja composta por vários microserviços, deve ver cada serviços deployed
+  num processo separado e independente, apesar de trabalharem em conjunto.
+  \item \textbf{Port binding:} Serviços auto-contidos devem ser disponibilizados aos restantes através de uma porta;
+  \item \textbf{Concurrency:} A concorrência é executada através da escalada horizontal dos serviços (multiplicação), tirando vantagem
+  do SO;
+  \item \textbf{Disposability:} Os processos devem ser descartáveis, ou seja, inicializar rapidamente e parar de forma
+  responsável, levando a um sistema mais robusto e resiliente. Se tivermos um sistema de escrita de ficheiros, este deve ser inicializado rapidamente para ficar disponível
+  assim que necessário, mas deve também garantir que quando é terminado guarda o buffer de escrita que
+  estava foi introduzido pelo utilizador;
+  \item \textbf{Dev/Prod parity:} Todos os ambientes, desde o desenvolvimento
+  local até à produção, devem ser o mais semelhantes possível.
+  Se acumularmos alterações no Dev, as operações de merge no Main vão ser muito mais complexas;
+  \item \textbf{Logs:} Os processos devem produzir \textbf{logs}
+  como fluxo de eventos, e confiar no ambiente de execução para
+  agregar e armazenar os mesmos;
+  \item \textbf{Admin processes:} Se tarefas de \textbf{admin} são necessárias,
+  devem ser mantidas no código finte e empacotados ao lado da aplicação,
+  para garantir que corre com os mesmo ambiente que a aplicação;
+\end{enumerate}
 
 \end{document}
