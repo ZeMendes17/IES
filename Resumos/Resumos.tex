@@ -2824,4 +2824,323 @@ desde então, cresceu de ser um (já sofisticado) \uline{cointainer de
 injeção de dependências} para um \textbf{ecosistema de frameworks
 que cobre vários casos de uso} no desenvolvimento de uma aplicação.
 
+Coexiste com a \textbf{JEE} (Java Enterprise Edition), mais tarde \textbf{Jakarta EE}. Apesar de definirem
+especificações distintas, a Spring implementa algumas do EE.
+
+\begin{flushleft}
+  \textbf{Nota:} Para cada interface o JEE define \textbf{JSR} -
+  Java Specification Request, que estabelecem a interface para cada
+  funcionalidade.
+\end{flushleft}
+
+
+\subsubsection{Arquitetura}
+
+\begin{center}
+  \includegraphics[scale=0.35]{76}
+\end{center}
+
+A arquitetura Spring divide-se em vários componentes como podemos verificar.
+
+
+\pagebreak
+
+O \textbf{core container} tem quatro múdulos, que são a base de qualquer
+aplicação:
+\begin{itemize}
+  \item \textbf{Spring Core} - Fornece implementação para funcionalidades
+  como IoC (Inversion of Control) e DI (Dependency Injection);
+  \item \textbf{Spring Beans} - Este módilo fornece implementações do padrão de fábrica
+  do BeanFactory;
+  \item \textbf{Spring Context} - Contrói em cima do Core e Beans e fornece
+  uma forma de aceder a objetos definidos e fornece suporte a interações
+  third-party como caching, mailing, and template engines. A interface ApplicationContext é a
+  a core part deste módulo;
+  \item \textbf{Spring Expression Language (SpEL)} - Permite aos utilizadores
+  usarem a String Expression Language para aceder e manipular o gráfo de
+  objetos durante a runtime;
+\end{itemize}
+
+\subsubsection{Anotações}
+
+No processo de compilação de um programa é feita uma análise sintática para verificar que o
+código cumpre com uma determinada estrutura. No entanto, há situações em que queremos
+adicionar verificações adicionais, ou mesmo alterar o código de forma sistemática em
+determinados trechos durante o processo de compilação.
+
+\vspace{2mm}
+
+Para reposnder a estes cenários e de forma a evitar a complexidade da
+alteração ao código, \uline{metadados que dão informação} sobre o código ao compilador
+e que podem ser considerados por outro desenvolvido por nós para esse fim.
+
+Facilita a deteção de erros ou supressão de avisos, por exemplo. Podem
+ter informação para o compilador (detetar erros e suprimir warnings),
+processamento compile-timee deployment-time, e processamento runtime.
+\textbf{As Anotações são muito utilizadas em na Spring Frameworks}.
+
+\begin{flushleft}
+  \textbf{Exemplos:}  De anotações interpretadas pelo Java Compiler são o @Override, @Deprecated.
+
+  Caso num programa utilizemos um método de uma classe anotado como @Deprecated, quando compilarmos estes
+  programa o compilador irá mostrar-nos o aviso de que estamos a utilizar um método obsoleto.
+\end{flushleft}
+
+
+\subsubsection{Inversão de Controlo (IoC)}
+
+Quando trabalhamos com uma framework, como esta fornece a maioria das funcionalidades
+necessárias ao funcionamento de uma aplicação web, a framework passa a ser a responsável
+pela \textbf{criação dos objetos}.
+
+IoC é um processo em que definimos uma classe, mas não criamos
+os objetos (apenas definimos como devem ser criados pelo
+IoC container).
+
+\begin{center}
+  \includegraphics[scale=0.4]{77}
+\end{center}
+
+O atributo \uline{name} da propriedade no XML deve ser mapeado getName e setName
+na classe do objeto a criar com \uline{Name} o valor de outro atributo.
+
+No exemplo acima para o atributos id e name devem haver os métodos getId() e setId() e getName() e setName().
+
+\subsubsection{Injeção de Dependências (DI)}
+
+Quando um objeto tem como atributo outro objeto, vai depender dele, sendo por isso
+necessário criá-lo antes do primeiro. A \textbf{injeção de dependências}
+é um padrão que \uline{remove as dependências dp código}.
+Podemos especificar as dependendências das classes através de
+\textbf{anotações} ou ficheiros externos como um XML.
+
+A injeção pode ser através de um contrutor ou de um seller.
+
+\subsubsection*{POJO (Plain Old Java Object)}
+
+\begin{center}
+  \includegraphics[scale=0.4]{78}
+\end{center}
+
+\subsubsection*{Com Spring DI}
+
+\begin{center}
+  \includegraphics[scale=0.4]{79}
+\end{center}
+
+Em \textbf{Spring} as classes identificadas com a anotação @Component são geridas de
+acordo com estes princípios de IoC e DI pelo \textbf{Spring Container}.
+O Spring IoC é o coração da Spring Framework, cada objeto delega o \textbf{trabalho
+de contruir} um IoC container. Este recebe metadados a partir de ficheiros XML,
+anotações Java ou código Java e produz um sistema ou uma aplicação completamente
+configurado e pronto a correr.
+
+\begin{center}
+  \includegraphics[scale=0.4]{80}
+\end{center}
+
+As principais tarefas realizadas pelo IoC container são:
+\begin{itemize} 
+  \item Instanciar o bean/objeto;
+  \item Escrever os beans juntos (injeção de dependências estre eles);
+  \item Configurar os beans;
+  \item Gerir o ciclo de vida dos beans;
+\end{itemize}
+
+Existem dois tipos de Spring IoC containers (interfaces):
+\begin{itemize}
+  \item \textbf{BeanFactory} - É o container mais simples, fornece
+  a configuração da framework e funcionalidades básicas;
+  \item \textbf{ApplicationContext} - contruído em cima da interface
+  BeanFactory, adiciona mais funcionalidades enterprise-specific (várias
+  interfaces para implementações distintas);
+\end{itemize}
+
+\pagebreak
+
+\subsubsection{Beans}
+
+São definidas pela documentação Spring como os objetos base da aplicação (backbone), que são geridos
+pelo Spring IoC Container (desde a instanciação e construção até à gestão).
+
+Algumas características chave dos beans são:
+\begin{itemize}
+  \item Todos os campos devem ser \textbf{privados};
+  \item Todos os campos devem ter \textbf{getters e setters};
+  \item Devem ter um \textbf{construtor vazio};
+  \item Os campos são acessados exclusivamente através dos getters/setters
+  e construtor;
+\end{itemize}
+
+O Spring é responsável por criar os objetos bean, mas, primeiro, temos de
+dizer à framework quais são os objetos que queremos que sejam criados.
+As \textbf{Bean definitions} dizem ao Spring quais classes a framework deve usar
+como beans. As Bean definitions são como receitas (também descrevem
+as propriedades do bean).
+
+\vspace{2mm}
+
+Existem \textbf{3 formas diferentes} de definir um Spring Bean:
+declarar a definição num \textbf{ficheiro XML configurável},
+anotando uma classe com a anotação \textbf{@Component} (ou derivadas como
+@Service, @Repository, @Controller) ou escrevendo um bean factory method
+anotado com a anotação \textbf{@Bean} num class Java personalizada de configuração. 
+
+Hoje em dia apenas se usam os dois últimos, mas o outro ainda é permitido
+para compatibilidade com versões anteriores.
+
+A \textbf{escolha entre os métodos de bean definition}
+é principalmente ditada pelo acesso ao código fonte da classe que
+queremos usar como um Spring Bean.
+
+\vspace{2mm}
+
+A anotação @Component é utilizada quando \textbf{temos acesso ao código fonte}. Quando esta só tem um construtor, o
+Spring considera os seus parâmetros como a lista de dependências obrigatórias. Caso haja mais do que um, devemos
+anotar o que define as dependências com @Autowired.
+
+No runtime, o Spring vai procurar por classes anotadas com @Component
+e vai usá-las como definições de bean. O processo de procurar por
+classes anotadas chama-se \textbf{component scanning}.
+
+\vspace{2mm}
+
+Quando \textbf{não temos acesso ao código fonte} da classe, definimos uma classe com um método de fábrica anotado com
+@Bean. Esta classe por sua vez é anotada com @Configuration, que marca a classe como sendo um container de
+definições @Bean. Podem ser definidos vários métodos de fábrica dentro da mesma classe de configuração.
+
+\begin{center}
+  \includegraphics[scale=0.5]{81}
+  \includegraphics[scale=0.5]{82}
+\end{center}
+
+\subsubsection{Spring Expression Language (SpEL)}
+
+Pode ser usada para manipular e aceder a um gráfo de objetos durante a runtime. SpEL está disponível
+via XML ou anotações e é avaliado durante o tempo de criação do bean.
+
+Possuí vários operadores disponíveis como:
+\uline{aritméticos} (+, -, *, /, \%), \uline{relacionais} (==, !=, <, >, <=, >=),
+\uline{lógicos} (and, or, not), \uline{condicionais} (?:), \uline{regex} (matches).
+
+\pagebreak
+
+\begin{center}
+  \includegraphics[scale=0.3]{83}
+  \includegraphics[scale=0.3]{84}
+\end{center}
+
+A anotação \textbf{@Value} permite a injeção de valores nos atributos nos beans
+
+\subsubsection{Aspect-Oriented Programming (AOP)}
+
+É uma abordagem de programação que permite a propriedades
+globais de um programa \textbf{determinarem como é que o código
+é compilado} para um programa executável.
+
+É um paradigma complementar à Programação Orientada a Objetos e
+que tem como objetivo a separação das responsabilidades de forma
+a melhorar a modularidade.
+
+\begin{center}
+  \includegraphics[scale=0.5]{85}
+\end{center}
+
+AOP \textbf{divide a lógica do programa} em partes distintas chamadas
+\textbf{concerns}. Isto aumenta a modularidade através de
+\textbf{cross-cutting concerns}. Um \textbf{cross-cutting concern}
+é um concern que afeta toda a aplicação e é centralizado
+num único local.
+
+AOP pode ser considerado como um padrão de design \textbf{decorador
+dinâmico} (o padrão decorador permite que um novo comportamento
+seja adicionado a uma classe já existente, dando wrap à classe
+original e duplicando a sua interface e depois delegar o origimal).
+
+\subsubsection*{Conceitos AOP Core}
+
+\begin{itemize}
+  \item \textbf{Aspect} - Uma modularização de um concern que corta
+  múltiplas classes, pode ser uma \textbf{classe} normal,
+  cofigurado através de configuração XML ou anotações com @Aspect;
+  \item \textbf{JoinPoint} - Um ponto durante a execução do programa,
+  onde o fluxo de execução foi alterado devido à exception catching
+  ou a chamada de um método;
+  \item \textbf{Pointcut} - São basicamente JoinPoints, mas com
+  advice (ou call aspect). Expressões que são correspondidas
+  em join points para determinar se o advice deve ser executado
+  ou não;
+  \item \textbf{Advice} - A ação tomada por um aspect num join point
+  particular (@Before, @After, @Around, @AfterReturning, @AfterThrowing);
+\end{itemize}
+
+\pagebreak
+
+\begin{center}
+  \includegraphics[scale=0.35]{86}
+\end{center}
+
+\subsubsection{Spring Web}
+
+Este componente aplica a arquitetura Model-View-Controller (MVC).
+
+\vspace{2mm}
+
+Quando recebe um pedido HTTP, o DispatcherServlet consulta o
+\textbf{HandlerMapping} para invocar o \textbf{Controller} apropriado.
+Este pega mo pedido e encaminha-o para o método adequado de processamento
+(GET ou POST) (o método vai dar set ao modelo de dados baseado em
+lógica de negógio definida e retorna o nome da view para o DispatcherServlet).
+
+De seguida, o DispatcherServlet pede ajuda ao \textbf{ViewResolver}
+para ir buscar a view definida para o pedido. Quando a view wstiver finalizada,
+o DispatcherServlet envia o \textbf{modelo de dados para a view}
+que é finalmente renderizada no browser.
+
+\begin{center}
+  \includegraphics[scale=0.5]{87}
+  \includegraphics[scale=0.5]{88}
+\end{center}
+
+\pagebreak
+
+\subsubsection{Sprint Data Access Modules}
+
+Há vários módulos que permitem criar a abstração entre os dados e o seu armazenamento.
+
+\begin{flushleft}
+  \textbf{JDBC:} Permite trabalhar diretamente com SQL. A camada abstrata
+  elimina a necessidade de overhead de exception handling;
+
+  \vspace{2mm}
+
+  \textbf{ORM (Object Relational Mapping):} Ao utilizarmos o ORM temos uma maior abstração, uma vez que trabalhamos sobre objetos Java, sendo
+  responsabilidade do módulo mapear as alterações na base de dados.
+  Fornece consistência/portabilidade para o código;
+
+  \vspace{2mm}
+
+  \textbf{OXM (Object XML Mapping):} Paradigma de cuma mas sobre XML.
+  Converte os objetos para o formato XML e vice-versa. A Spring OXM
+  fornece uma API uniforme para acessar qualquer framework OXM;
+
+  \vspace{2mm}
+
+  \textbf{JMS (Java Messaging Service):} Facilita a interação com serviços de
+  mensagens. Tem funcionalidades para produzir e consumir mensagens
+  entre vários clientes;
+
+  \vspace{2mm}
+
+  \textbf{Transaction:} Facilita a implementação dos conceitos de transações ao nível da organização.
+  suporta gestão de transações declarativa e programática para classes que
+  implementam interfaces especiais e para todos os POJOs. Todas as transações
+  ao nível enterprise podem ser implementadas pelo Spring utilizando este módulo; 
+\end{flushleft}
+
+
+
+
+
+
 \end{document}
