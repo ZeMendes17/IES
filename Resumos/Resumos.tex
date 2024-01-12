@@ -3138,6 +3138,122 @@ Há vários módulos que permitem criar a abstração entre os dados e o seu arm
   ao nível enterprise podem ser implementadas pelo Spring utilizando este módulo; 
 \end{flushleft}
 
+\section{Spring Boot}
+
+Resumidamente, a Spring Framework fornece uma \textbf{infrastrutura
+de suporte para o desenvolvimento de aplicações Java}.
+Tem muitas funcionalidades, como a Injeção de Dependências e
+módulos como o Spring MVC, Spring JDBC, Spring Security,
+Spring ORM, Spring AOP, Spring Test.
+
+Estes módulos \textbf{podem reduzir o tempo de desenvolvimento}
+de uma aplicação.
+
+\vspace{2mm}
+
+O \textbf{Spring Boot} é uma estensão da Spring Framework, que tem como
+objetivo \uline{eliminar a necessidade de definir as configurações padrão}
+para iniciar uma aplicação Spring e \uline{fornece uma estrutura
+de projeto padrão}, para umdesenvolvimento mais rápido e eficiente.
+Algumas funcionalidades são: \uline{"starter" dependencies} para simplificar
+a build e as configurações da aplicação, \uline{servidor embutido} para
+evitar complexidade e \uline{configurações automáticas para a funcionalidade
+Spring}.
+
+\begin{center}
+  \includegraphics[scale=0.5]{89}
+\end{center}
+
+\pagebreak
+
+Os objetivos principais do Spring Boot são:
+\begin{itemize}
+  \item \textbf{Redução do tempo de desenvolvimento},
+  juntamente com tempo de Unit Test e Integration Test;
+  \item Evita completamente a necessidade de \textbf{configuração XML};
+  \item Fornece uma \textbf{anotação simples} (baseada nas do Spring);
+  \item Evita escrever vários imports;
+  \item Abordagem \textbf{opinionated development}, de forma a fornecer
+  algumas configurações padrão para começar um novo projeto rapidamente;
+\end{itemize}
+
+Os principais componentes do Spring Boot são:
+
+\begin{itemize}
+  \item \textbf{Spring Initializr} - Interface Web para dar um
+  quick start no desenvlvimento de aplicações Spring Boot;
+  \item \textbf{Starters} - Combina um grupo de dependências comuns
+  e relacionadas numa só, permitindo adicionar jars no classpath;
+  \item \textbf{AutoConfigurator} - Reduz a configuração Spring,
+  tenta configurar automaticamente a aplicação Spring baseado
+  nas dependências jar;
+  \item \textbf{CLI} - Permite correr e testar aplicações Spring Boot na linha de comandos;
+  \item \textbf{Actuator} - Fornece endpoints e métricas;
+\end{itemize}
+
+Os seus projetos são inicilizados em https://start.spring.io/, onde é possível selecionar várias
+dependências e obter um projeto pré-configurado e com a estrutura padrão.
+
+\vspace{2mm}
+
+A aplicação principal consiste num esqueleto padrão, onde a classe principal é passada à
+SpringApplication para esta a executar. Verifica-se a \textbf{inversão de controlo}.
+
+\begin{center}
+  \includegraphics[scale=0.5]{90}
+\end{center}
+
+A anotação \textbf{@SpringBootApplication} é uma combinação de três anotações:
+\begin{itemize}
+  \item \textbf{@Configuration} - Designa a classe como sendo de configuração,
+  utilizando a configuração Spring;
+  \item \textbf{@ComponentScan} - Indica que a aplicação deve fazer
+  scan no pacote atual e sub-pacotes de modo a encontrar
+  classes anotadas com @Component, @Service, @Repository, @Controller,
+  configurando-as como beans no contexto da aplicação;
+  \item \textbf{@EnableAutoConfiguration} - Ativa a auto-configuração, evitando a escrita de páginas XML para este fim
+\end{itemize}
+
+Por exemplo, se quisermos desenvolver uma aplicação Spring WebApplication
+com Tomcat, precisavamos de adicionar várias dependências, no
+entanto, com o Spring Boot, basta adicionar a dependência
+\textbf{spring-boot-starter-web}. Esta pode ser adicionada
+no ficheiro pom.xml ou automaticamente através do Spring Initializr.
+
+\subsection{Arquitetura Spring Web MVC (Model-View-Controller)}
+
+Este componente é responsável por \uline{identificar quais as classes que vão trabalhar
+ com os dados e quais vão atendender pedidos do navegador, funcionando como
+a ponte que os liga}.
+
+Permite a criação de beans especiais, \textbf{@Controller} e
+\textbf{@RestController}, responsável por capturar os
+pedidos HTTP e encaminhá-los para as funções responsáveis por
+cada um (\textbf{@RequestMapping}).
+
+\begin{center}
+  \includegraphics[scale=0.5]{91}
+\end{center}
+
+O \textbf{modelo de dados} é definido através de uma típica classe Java,
+com atributos privados com getters e setters e um construtor vazio por defeito.
+Podem-lhe ser associadas anotações como @Entity, @Table(name=X) e aos
+seus atributos @Id ou @GeneratedValue.
+
+Os \textbf{repositórios} definem interfaces que fazem a ligação entre as
+entidades do modelo de dados e a base de dados. A sua definição é
+bastante simples e consiste na extensão de um JPARepository, a partir da
+qual são herdados os métodos de manipulação de dados CRUD. Podem no
+entanto ser definidos métodos adicionais para queries mais complexos.
+
+\begin{center}
+  \includegraphics[scale=0.5]{92}
+  \includegraphics[scale=0.5]{93}
+\end{center}
+
+
+
+
 
 
 

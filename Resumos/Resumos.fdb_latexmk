@@ -1,8 +1,8 @@
 # Fdb version 3
-["pdflatex"] 1705023766 "/home/mendes/Desktop/IES/Resumos/Resumos.tex" "Resumos.pdf" "Resumos" 1705023770
+["pdflatex"] 1705067614 "/home/mendes/Desktop/IES/Resumos/Resumos.tex" "Resumos.pdf" "Resumos" 1705067618
   "/etc/texmf/web2c/texmf.cnf" 1703524893 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/mendes/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk" 1703525194 11524 6deddaf5c79534458281f6cebbd7c0ac ""
-  "/home/mendes/Desktop/IES/Resumos/Resumos.tex" 1705023766 105803 4a3064654390510871f86f15be04a4d0 ""
+  "/home/mendes/Desktop/IES/Resumos/Resumos.tex" 1705067614 110642 ba581d7fda83fa0309f071e6e6de121c ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -160,9 +160,14 @@
   "Images//86.png" 1705022409 108888 03a04ecb3aa240ef973a90b39015fb36 ""
   "Images//87.png" 1705023003 31284 b9b7c9beedb20b10418389b915806f5d ""
   "Images//88.png" 1705023022 97349 16b154a089c16d930099b9bccaaf528f ""
+  "Images//89.png" 1705064515 14271 a3f95b8dfa856a5663fc88d448854b07 ""
   "Images//9.png" 1703769478 63545 d539cf5a6c77a1bbf3aa3e4095d0eaef ""
-  "Resumos.aux" 1705023770 17560 0f8077f00407b38226d00a546bc30259 "pdflatex"
-  "Resumos.tex" 1705023766 105803 4a3064654390510871f86f15be04a4d0 ""
+  "Images//90.png" 1705065643 30357 fdb8ffec12cfc18489c29db0ea760f6a ""
+  "Images//91.png" 1705066916 26208 a06e350647abc3c9d8274fa01a15f149 ""
+  "Images//92.png" 1705067265 48486 e5aef84ba8d4ee15339dec059c2e4547 ""
+  "Images//93.png" 1705067503 13719 7348fd9c68e9d74c9621c8d2c5513c2e ""
+  "Resumos.aux" 1705067618 17804 99b13c367ceb23001097a6ab584f3792 "pdflatex"
+  "Resumos.tex" 1705067614 110642 ba581d7fda83fa0309f071e6e6de121c ""
   "UA.jpg" 1703679820 24745 bb294df60b1949399db2c463a4c9dbd7 ""
   "UA.png" 1703679820 4155 29baef92e33889c7f171c7001cfe64ba ""
   (generated)
