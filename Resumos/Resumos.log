@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.12.25)  12 JAN 2024 19:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.12.25)  13 JAN 2024 05:09
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1171,22 +1171,77 @@ Package pdftex.def Info: UA.jpg  used on input line 3507.
 [72]
 File: UA.jpg Graphic file (type jpg)
 <use UA.jpg>
-Package pdftex.def Info: UA.jpg  used on input line 3525.
+Package pdftex.def Info: UA.jpg  used on input line 3553.
 (pdftex.def)             Requested size: 9.02876pt x 9.02876pt.
- [73] (./Resumos.aux) ) 
+ [73]
+Overfull \hbox (4.10818pt too wide) in paragraph at lines 3559--3563
+\OT1/cmr/m/n/10 destes com-po-nentes pode ser de-sen-volvido numa lin-guagem de pro-grama^^Xc~ao difer-ente, sem preju^^S^^Pzo
+ []
+
+<./Images//104.png, id=459, 308.352pt x 224.63925pt>
+File: ./Images//104.png Graphic file (type png)
+<use ./Images//104.png>
+Package pdftex.def Info: ./Images//104.png  used on input line 3582.
+(pdftex.def)             Requested size: 154.17561pt x 112.31934pt.
+File: UA.jpg Graphic file (type jpg)
+<use UA.jpg>
+Package pdftex.def Info: UA.jpg  used on input line 3617.
+(pdftex.def)             Requested size: 9.02876pt x 9.02876pt.
+[74 <./Images//104.png>]
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 3673.
+ (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 3673.
+File: UA.jpg Graphic file (type jpg)
+<use UA.jpg>
+Package pdftex.def Info: UA.jpg  used on input line 3686.
+(pdftex.def)             Requested size: 9.02876pt x 9.02876pt.
+ [75]
+<./Images//105.png, id=467, 948.54375pt x 175.25475pt>
+File: ./Images//105.png Graphic file (type png)
+<use ./Images//105.png>
+Package pdftex.def Info: ./Images//105.png  used on input line 3697.
+(pdftex.def)             Requested size: 474.2707pt x 87.62715pt.
+
+Overfull \hbox (56.01703pt too wide) in paragraph at lines 3697--3698
+ [] 
+ []
+
+File: UA.jpg Graphic file (type jpg)
+<use UA.jpg>
+Package pdftex.def Info: UA.jpg  used on input line 3738.
+(pdftex.def)             Requested size: 9.02876pt x 9.02876pt.
+[76 <./Images//105.png>]
+File: UA.jpg Graphic file (type jpg)
+<use UA.jpg>
+Package pdftex.def Info: UA.jpg  used on input line 3792.
+(pdftex.def)             Requested size: 9.02876pt x 9.02876pt.
+ [77]
+File: UA.jpg Graphic file (type jpg)
+<use UA.jpg>
+Package pdftex.def Info: UA.jpg  used on input line 3853.
+(pdftex.def)             Requested size: 9.02876pt x 9.02876pt.
+ [78]
+File: UA.jpg Graphic file (type jpg)
+<use UA.jpg>
+Package pdftex.def Info: UA.jpg  used on input line 3886.
+(pdftex.def)             Requested size: 9.02876pt x 9.02876pt.
+ [79] (./Resumos.aux) ) 
 Here is how much of TeX's memory you used:
- 6581 strings out of 480247
- 98625 string characters out of 5896150
+ 6624 strings out of 480247
+ 99376 string characters out of 5896150
  565917 words of memory out of 5000000
- 24457 multiletter control sequences out of 15000+600000
+ 24497 multiletter control sequences out of 15000+600000
  478672 words of font info for 65 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  55i,15n,62p,245b,1384s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/mendes/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tctt0900.600pk> </home/mendes/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on Resumos.pdf (74 pages, 7956508 bytes).
+Output written on Resumos.pdf (80 pages, 8330546 bytes).
 PDF statistics:
- 511 PDF objects out of 1000 (max. 8388607)
- 202 compressed objects within 3 object streams
+ 535 PDF objects out of 1000 (max. 8388607)
+ 215 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
- 526 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 536 words of extra memory for PDF output out of 10000 (max. 10000000)
 

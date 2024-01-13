@@ -3522,4 +3522,365 @@ aplicações SaaS).
   para garantir que corre com os mesmo ambiente que a aplicação;
 \end{enumerate}
 
+\subsection{Microservices}
+
+Não existe uma definição padrão para os microserviços, mas
+a maioria referencia o papel seminal de Martin Fowler, que
+diz: "Microservices: A new architectual term".
+Este diz que os microserviços são utilizados para compôr
+aplicações complexas, estes são: processos \textbf{pequenos}, \textbf{independentes}
+(autonomos) e \textbf{subestitutiveis} que \textbf{comunicam}
+através de uma lightweight API que não depende da linguagem.
+
+Cada microserviço é uma aplicação de 12 fatores (como visto anteriormente),
+com armazenamento subestitutivel que fornecem um message broker,
+registo de serviços e independentes do armazenaento de dados.
+
+\vspace{2mm}
+
+O termo \textbf{"pequeno"} significa que este é focado num único
+propósito. Os microserviços \textbf{apenas devem fazer uma coisa}
+e \textbf{fazê-la bem}.
+
+\vspace{2mm}
+
+\textbf{Independentes} e \textbf{Autonomos} significa que deve ser possível parar um componente para manutenção por exemplo sem “partir” os
+restantes, que podem até dar timeouts nas consultas caso estejamos a trabalhar com uma BD por exemplo. No entanto,
+quando este voltar a ser inicializado, as restantes devem voltar ao seu funcionamento normal sem necessidade de
+intervenção.
+
+\pagebreak
+
+\textbf{Substitutiveis},  porque deve ser possível alterar o funcionamento interno de cada componente, ou mesmo substituílo por
+um novo, desde que este mantenha as suas funcionalidades, ou seja, a mesma interface de acesso (API).
+
+\vspace{2mm}
+
+\textbf{Poliglotas},  porque dada a independência dos micro-serviços de uma aplicação, cada um destes componentes pode
+ser desenvolvido numa linguagem de programação diferente, sem prejuízo para as restantes, desde que todas
+comuniquem de acordo com um protocolo de comunicação agnóstico da linguagem. Isto é muito poderoso e eficiente,
+mas apenas é possível com protocolos language-agnostic.
+
+\vspace{2mm}
+
+\textbf{Representational State Transfer (REST)} é um padrão de arquitetura
+que define guidelines para criar interfaces uniformes que separam
+os representação dos dados "on-the-wire" da implementação do serviço.
+Estas arquiteturas requerem que o request state seja mantido pelo cliente,
+permitindo que o servidor seja stateless.
+
+\subsection{Estrutura Interna}
+
+Um micro-serviço é como que uma pequena aplicação, uma vez que tal como
+estas vai \uline{trabalhar num domínio do problema}, \uline{expôr
+recursos} atarvés de uma determinada interface de acesso (API), \uline{aceder
+a serviços externos} e \uline{aceder a bases de dados externas}.
+Geralmente cada micro-serviço tem a si associada uma base de dados de uso exclusivo. Não é
+comum haver a partilha destes recursos por vários serviços.
+
+\begin{center}
+  \includegraphics[scale=0.5]{104}
+\end{center}
+
+\subsection{Antipadrões que adotam os microserviços}
+
+\begin{flushleft}
+  \textbf{Microservices are a magic pixie dust} - Acreditar que os microserviços
+  resolvem todos os problemas de implementação;
+
+  \vspace{1mm}
+
+  \textbf{Microservices as the goal} - Fazer da adoção dos microserviços
+  o objetivo principal e medir o sucesso em termos de número de serviços escritos;
+  
+  \vspace{1mm}
+
+  \textbf{Red Flag Law} - Manter o mesmo processo de desenvolvimento e estrutura
+  organizacional que eram utilizadas no desenvolvimento de aplicações monolíticas;
+
+  \vspace{1mm}
+
+  \textbf{Scattershot adoption} - Ter equipas para adotar a arquitetura
+  de microserviços sem ter uma estratégia de adoção (sem qualquer coordenação);
+
+  \vspace{1mm}
+
+  \textbf{Trying to fly before you can walk} - Começar a praticar técnicas
+  básicas de software como clean code, good design e testes automáticos;
+
+  \textbf{Focar na técnologia} - Focar nos aspetos tecnológicos (mais comum
+  é no desenvolvimento da infrastrutura) e esquecer de issues chave, como
+  decomposição de serviços;
+\end{flushleft}
+
+\pagebreak
+
+\subsection{Criar Microserviços em Java}
+
+Como identificar e criar microserviços?
+\begin{center}
+  Java Plataforms $\rightarrow$ Versioned Dependencies $\rightarrow$ Identifying Services $\rightarrow$ Creating REST APIs
+\end{center}
+
+\subsubsection{Plataformas Java}
+
+Usar \textbf{anotações} pode simplificar o código, eliminando
+a necessidade de escrever código boilerplate, mas pode chegar a um
+ponto onde existe "demasiada magia".
+
+Podemos criar \uline{microserviços perfeitamente funcionais}
+usando nada a não ser bibliotecas Java de baixo nível.
+No entanto, é geralmente recomendado ter algo que forneça
+um nível razoável de suporte para concerns comuns, permitindo
+que o código de um serviço se foque em satisfazer os requisitos
+funcionais.
+
+\vspace{2mm}
+
+O \textbf{Spring Boot} dá ênfase à convenção sobre configuração,
+utiliza um conjunto de anotações e descoberta de classpath
+para configurar funções adicionais.
+
+\vspace{2mm}
+
+\textbf{Spring Cloud} é uma coleção d integrações entre
+tecnologias de cloud e o modelo de programação Spring.
+
+\vspace{2mm}
+
+Até agora foi abordado o \textbf{Spring Boot}, um conjunto de convenções que simplificam o
+desenvolvimento de aplicações Spring. Este é bastante utilizado para a criação de aplicações
+standalone, que são disponibilizadas num determinado porto e funcionam de forma isolada.
+Mas spondo que queremos conectar várias aplicações e construir um sistema
+distribuído, como é que o fazemos?
+
+\textbf{Spring Cloud}, é um projeto que reduz a complexidade associada aos SD, permite a descoberta de serviços, oferece
+mecanismos de redundância, load balancing, problemas de performance e complexidade de
+deploy.
+
+\vspace{2mm}
+
+Para facilitar a gestão de configurações, mais vez recorre-se a ficheiros de configuração como o
+\textbf{application.properties}. Neste ficheiro podem ser definidas configurações como endereços de bases de dados
+e serviços externos com dados de acesso, mas também texto em várias línguas de forma a facilitar o suporte
+de diferentes idiomas pela nossa aplicação.
+
+\vspace{2mm}
+
+Para utilizar uma \textbf{configuração} numa classe da aplicação, basta anotá-la com @EnableAutoConfiguration e
+definir a variável que vai receber o seu valor anotada com @Value("\${X}"), sendo X o nome da propriedade
+definida no ficheiro de configurações. Property files podem usar Encryption/Decrypti
+(ex: password: \{cipher\}cryptedpassword).
+
+\vspace{2mm}
+
+Para facilitar a \textbf{escalabilidade} destaca-se ainda a o servidor de \textbf{nomes/descoberta} Eureka, que permite o registo dos
+vários serviços da aplicação, que deixam assim de ter necessidade de ter um endereço fixo. Os clientes que lhes
+queiram aceder consultam primmeiro o Eureka para resolver o seu endereço.
+
+A aplicação de resolução de endereço é anotada com @EnableEurekaServer, o que vai disponibilizar este serviço no
+porto 8761. Os clientes que devam ser registados no Eureka, devem ver a sua classe principal anotada com
+@EnableDiscoveryClient.
+
+\pagebreak
+
+Temos ainda, \textbf{Load Balancing} com Ribbon,
+\textbf{Declarative REST} Client com OpenFeign, que cria uma implementação
+dinâmica de uma interface decorada com anotações JAX-RS ou Spring MVC,
+\textbf{Circuit Breaker} Resilience4 ou Sentinel, para detetar falhas
+e encapsular a lógica para previnir falhas futuras e
+\textbf{Data Flow} que fornece ferramentas para criar topologias
+complexas para streaming
+and batch data pipelines.
+
+\begin{center}
+  \includegraphics[scale=0.5]{105}
+\end{center}
+
+\subsubsection{Controlo de Versões e Dependências}
+
+Ferramentas de build como o Maven e o Gradle fornecem mecânismos
+fáceis para definir e gerir versões de dependências.
+Explicitamente delara a versão, garantindo que o artefacto corre
+igualmente em produção como em desenvolvimento.
+
+\subsubsection{Identificação de Serviços}
+
+Quando criamos endpoints de acesso aos serviços, é importante documentá-los. Para este
+efeito, existe uma norma definida pela \textbf{Open API Iniciative} (OAI) para web services.
+Esta é baseada em \textbf{Swagger}, que define a estrutura e formata
+os metadados para criar uma representação de uma API RESTful.
+A definição é normalmente escrita num ficheiro portável, em JSON ou YAML.
+
+A definição do swagger pode ser ainda mais extendida para gerar
+\textbf{stubs} (código de exemplo) para clientes e servidores, simulando
+o comportamento do código.
+
+\subsubsection{Criação de APIs REST}
+
+Não há qualquer restrição quanto à funcionalidade implementada em cada \textbf{método HTTP}. No
+entanto, é importante que a convenção seja seguida, de forma a facilitar a sua utilização.
+Por exemplo podemos criar entidades através de um pedido GET. No entanto, a convenção é fazê-lo com POST e é
+assim que deve ser feito!
+
+\begin{itemize}
+  \item \textbf{POST} -  Criação de recursos. Operação não idempotente (mas pode ser),
+  isto é, por exemplo se um POST criar um recurso, se este for usado várias vezes,
+  um recurso novo e único deve ser criado como resultado de cada invocação.
+
+  \item \textbf{GET} - Consulta de informação. Operações idempotentes e nulipotentes (não alterar a base de dados,
+  não devendo ter efeitos colaterais).
+
+  \item \textbf{PUT} -  Atualização de recursos. Operação idempotente,
+  muitas das vezes é necessário copiar o recurso, daí ser idempotente.
+
+  \pagebreak
+
+  \item \textbf{PATCH} - Atualização parcial de recursos. Pode ou não ser idempotente,
+  dependendo de como é implementado.
+
+  \item \textbf{DELETE} - Eliminação de recursos. Operação idempotente,
+  uma vez que o recurso apenas pode ser eliminado uma vez.
+\end{itemize}
+
+O \textbf{valor de retorno} dos pedidos deve também ser relevante e útil. Para além do \uline{código HTTP},
+deve também ser retornada a informação manipulada, de forma a evitar uma nova chamada à
+API e a tornar a comunicação mais eficiente. Se um recurso for
+criado ou atualizado, deve estar incluido na resposta, eliminando a necessidade
+de uma nova chamada para o obter (GET).
+
+Por exemplo em caso de sucesso deve ser retornado código 200 (OK), ou 400 em caso de um pedido mal formado (BAD
+REQUEST). 204 (NO CONTENT), 201 (CREATED), 409 (CONFLICT), 404 (NOT FOUND).
+
+\vspace{2mm}
+
+A forma como os \textbf{URIs dos recursos} são definidos tem também definido um padrão, que define
+que este deve ser composto por nomes plurais e nunca por verbos. Para manipular o mesmo
+recurso, deve ser utilizado o mesmo URI, com /ID quando se pretende consutar ou manipular
+um recurso concreto. As relações são modeladas a partir do URI do recurso.
+
+Por exemplo, GET /accounts/16, PUT /accounts/16,
+PATCH /accounts/16, DELETE /accounts/16, são operações
+sobre o mesmo recurso, e se quisermos alterar as credenciais
+deste utilizador, usariamos o URI /accounts/16/credentials.
+
+\vspace{2mm}
+
+A \textbf{evolução da API} é também uma questão bastante importante, uma vez que as \uline{alterações à
+sua interface não devem implicar a alteração dos serviços que a utilizam}, uma vez que iria
+violar o princípio da independência.
+
+Um dos beneficios dos microserviços é permitir que os serviços
+\textbf{evoluam de forma independente}. Dado que Microserviços
+podem chamar serviços, esta independência não pode
+"quebrar" a API. Se precisarmos de fazer alterações importantes
+à API, existem algumas maneiras de lidar com a versão do
+recurso REST: \textbf{colocar a versão no URI}, definir a \textbf{versão no cabeçalho do pedido HTTP}
+ou até mesmo no cabeçalho do HTTP Accept header e permitir a negociação.
+
+A versão deve ser aplicada à aplicação como um todo. Por exemplo /api/v1/user e não /api/user/v1.
+
+\subsection{Serviços de Localização}
+
+Como visto anteriormente, em micro-serviços a escalada é feita horizontalmente, ou seja,
+através da multiplicação dos recursos. No entanto, esta traz a si associado os problemas da
+localização dos serviços e de distribuição do trabalho entre as várias instância. Para lhes dar
+resposta foram criados métodos para a localização de serviços e
+load balancing sobre as diferentes instâncias de um serviço.
+
+\pagebreak
+
+Existem 4 razões para o porquê de um microserviço querer
+comunicar com os serviços de localização:
+
+\begin{itemize}
+  \item \textbf{Registration} - Depois de um serviço ser deployed com sucesso,
+  o microserviço deve estar registado com o serviço de registo;
+
+  \item \textbf{Heartbeats} - O microserviço deve enviar heartbeats
+  regulares para o serviço, para mostrar que está pronto para receber
+  pedidos;
+
+  \item \textbf{Service Discovery} - Para comunicar com outro
+  serviço, um microserviço deve chamar o serviço de localização
+  para obter uma lista de instências disponíveis;
+
+  \item \textbf{De-Registration} - Quando um serviço está em baixo, deve ser
+  removido da lista de serviços disponíveis.
+\end{itemize}
+
+A utilização de terceiros implica a inspeção constante dos serviços para determinar o seu estado atual e atualizá-lo no
+serviço de localização. Tem como vantagem a separação das lógicas do negócio e do registo. No entanto, implica o
+deploy de um componente extra.
+
+\subsection{Tolerância a Falhas}
+
+Para garantir que os serviços disponibilizados nas aplicações são tolerantes a falhas, é
+importante que incorporem algumas funcionalidades.
+
+\begin{itemize}
+  \item \textbf{Timeouts} - Tempo máximo para a resposta a cada pedido (sendo o pedido assincrono ou não);
+  \item \textbf{Circuit Breakers} - Contagem de timeouts que quando atinge um determinado patamar assume que vai dar
+  sempre timeout e deixa de fazer pedidos para esse endpoint;
+  \item \textbf{Bulkheads} - Gestão de falhas, de forma a garantir que
+  esta não vai a baixo. Como que o bloco catch. Garantem que as exceções não comprometem o
+  normal funcionamento do serviço. A forma mais fácil é um fallback
+  quando um serviço não vital falha;
+  \item \textbf{Consuming APIs} - Como consumidores de uma API,
+  precisamos de \textbf{validar a resposta} para verificar que contém a
+  informação. Quando se faz a validação ou JSON parsing (para obter a
+  informação se recebermos um JSON), apenas \textbf{validar
+  o pedido contra as variáveis ou atributos} que são necessários.
+  Desta maneira, os microserviços são mais resistentes a mudanças;
+  \item \textbf{Producing APIs} - Quando produzimos uma API,
+  para clientes externos, é necessário fazer duas coisas na receção/retorno
+  de respostas: \textbf{aceitar atributos desconhecidos como parte
+  do pedido} e \textbf{apenas retornar atributos que são relevantes
+  para a API ser invocada} (deixando espaço para a implementação
+  de um serviço para mudar ao longo do tempo). Se cumprirmos estes,
+  podemos alterar a API para mudar requisitos para os clientes -
+  Principio da Robustez.
+\end{itemize}
+
+Os deployment artifacts podem correr em sistemas diferentes,
+muitos serviços devem ser configurados para fazer os serviços funcionarem.
+A intervenção humana deve ser minima, usando:
+\textbf{Source Code Management} (SCM) como Git, \textbf{Dependency
+Management} como Maven, \textbf{Repository Management Tools} e
+\textbf{CI-Tools} como Jenkins.
+
+\pagebreak
+
+Depois de contruir o microserviço, precisamos de decidir no
+\textbf{formato do package para dar deploy à aplicação}.
+Pode ser JAR/WAR, Executable JAR, Containers, ou
+cada microserviço pode ter o seu próprio servidor
+virtualizado.
+
+\vspace{2mm}
+
+\textbf{JAR/WAR} - É o formato padrão para aplicações Java EE.
+Tem alguns problemas como, algumas aplicações necessitam de ser \uline{reiniciados},
+load de uma aplicação pode \uline{afetar outras}. Se este padrão
+for usado com microserviços, a \textbf{relação deve ser de 1 para 1
+entre o serviço e o middleware do servidor}.
+
+\vspace{2mm}
+
+\textbf{Executable JAR} - Dar pack a tudo o que é necessário
+para correr a aplicação, dentro de um ficheiro JAR.
+
+\vspace{2mm}
+
+\textbf{Containers} - \textbf{Trazer mais do sistema operativo
+para ti}, evitando o problema que resultam em inconsistências
+na consistência do sistema operativo. Os containers são lightweight
+virtualization artifacts que são hosted num sistema operativo
+existente.
+
+\vspace{2mm}
+
+\textbf{Virtual Machines} - Para gerir este tipo de servidores, podemos usar
+\textbf{Vagrant, VMWare, VirtualBox}.
+
 \end{document}
