@@ -3883,4 +3883,644 @@ existente.
 \textbf{Virtual Machines} - Para gerir este tipo de servidores, podemos usar
 \textbf{Vagrant, VMWare, VirtualBox}.
 
+\section{Sistemas baseados em Eventos}
+
+Atualmente, \textbf{o desenvolvimeto de aplicações} é baseado em conceitos como
+\textbf{microserviços} e funções \textbf{serverless}.
+No entanto, nós vivemos num \textbf{mundo cloud-native}, estes modelos
+são muito bons para ambientes distribuídos baseados eem cloud, mas
+simplesmente construir e fazer deploy de serviços e funções não é
+suficiente.
+
+\vspace{2mm}
+
+Sozinhos, os microserviços não fazem muito,
+\textbf{precisamos de uma forma de conectar os componentes}
+(para eles trocarem informação, formando uma verdadeira aplicação).
+Em Engenharia de Software, isto é uma das decisões de arquitetura mais importantes de
+se fazer.
+
+\begin{center}
+  \includegraphics[scale=0.5]{106}
+  \includegraphics[scale=0.5]{107}
+\end{center}
+
+As imagens apresentam duas adoções, a primeira é
+\textbf{baseada em pedidos} e a segunda é \textbf{baseada em eventos}.
+
+\vspace{2mm}
+
+O problema da arquitetura baseada em pedidos é que é mais demorada, uma vez que após a confirmação do
+pagamento vai pedir a criação do registo, que após concluída vai pedir para enviar e-mail e só no fim vai guardar os
+dados do cartão, depois da qual responde que o pagamento foi bem sucedido. A espera que cada um destes passos
+intermédios seja concluído vai atrasar imenso a resposta à aplicação que fez o pedido de pagamento.
+
+\pagebreak
+
+Na arquitetura baseada em eventos, após a confirmação do pagamento o evento é gerado no sistema de mensagens e
+o serviço de pagamento fica imediamente livre para responder ao cliente que o pagamento foi bem sucedido,
+passando as restantes responsabilidades para o sistema de mensagens, que aciona as 3 ações que anteriormente
+eram geradas pelo sistema de pagamento.
+
+\vspace{2mm}
+
+A arquitetura baseada em eventos é a mais comum e pode ser implementada através de \textbf{filas
+de mensagens} como RabitMQ ou \textbf{enterprise seervice buses (ESBs)} como o WSO2. Mais
+recentemente foi introduzido o conceito de \textbf{streaming de mensagens} com o Kakfa.
+
+Esta última está a crescer, uma vez que é visto como
+uma ferramenta útil para a implementação de uma
+\textbf{arquitetura orientada a eventos}.
+
+As filas de mensagens e os streamings são ambos intermediários de mensagens entre produtores e consumidores, mas
+com um modo de funcionamento diferente. As filas de mensagens removem as mensagens da fila quando as entregam
+ao consumidor, eliminando o seu registo. Por outro lado, os streamings persistem as mensagens entregues ao
+consumidor, sendo responsabilidade do último manter um ponteiro para a mensagem a ler a seguir, libertando o código
+da aplicação de se preocupar com a potencial perda de transações, uma vez que pode pedir por mensagens lidas
+anteriormente.
+
+As filas são mais utilizadas em arquiteturas orientadas a serviços (SOA), enquanto que os streamings nos micro
+serviços.
+
+\subsection{Eventos}
+
+Define-se por \textbf{evento} algo que acontece dentro de um sistema computacional durante um
+determinado processo. Mimetizam a forma dos humanos organizarem o dia-a-dia e diminuem o
+número de relações de um-para-um nos sistemas distribuídos, aumentando o potencial dos
+micro serviços.
+Uma \textbf{arquitetura orientada a eventos} permita gerar, armazenar,
+acessar e reagir a estes eventos.
+
+\vspace{2mm}
+
+Um \textbf{exemplo} de uma “arquitetura” baseada em eventos no mundo real é um restaurante onde os empregados de mesa
+coloquem os papéis com os pedidos dos clientes por ordem num quadro, que é consultado pelo pessoal da cozinha à
+medida que estes têm disponibilidade para cozinhar mais uma refeição e pelos empregados do balcão para preparar
+as bebidas e os aperitivos. O quadro onde os pedidos são colocados é como que um sistema de stream de
+mensagens, que pode ser consultado tanto pelo pessoal da cozinha como do balcão, sendo responsabilidade de cada
+um saber a que pedidos já responderam. Eventualmente o papel de cada pedido será removido pelo empregado
+quando este tiver pronto e sido entregue ao cliente.
+
+Neste caso é também visível a redução do número de relaçõs de um-para-um, uma vez que em vez de ter de se dirigir
+à cozinha e ao pessoal do balcão para fazer o mesmo pedido, o empregado limita-se a colocá-lo no quadro.
+
+\vspace{2mm}
+
+Não devem ser confundidos com queries, que são pedidos
+de consulta e que ao contrário de enventos e comandos,
+são livres de efeitos colaterais (estado do sistema permanece
+inalterado), nem comandos, que são pedidos de ação que
+alteram o estado do sistema, sendo sincronos e tipicamente
+indicam compleção.
+
+\pagebreak
+
+\subsubsection{Tipos de Eventos}
+
+\begin{flushleft}
+  \textbf{Event Notification} - Notifica outros sistemas de alterações
+  no seu dominio. O que os outros sistemas fazem com esta informação
+  é da sua responsabilidade. \textbf{Normalmente não carregam
+  muitos dados}, resultando num sistema mais desacoplado e
+  com menos tráfego de rede.
+
+  \vspace{1mm}
+
+  \textbf{Event-carried State Transfer} - Evolução dos anteriores,
+  mas o evento inclui \textbf{dados para trabalhos adicionais}.
+  Este modelo pode ser apelativo a desenvolvedores familiarizados
+  com RESTful interfaces, mas, dependendo do sistema, pode
+  levar a muito tráfego de dados na rede e duplicação de dados
+  no armazenamento.
+
+  \vspace{1mm}
+
+  \textbf{Event Sourcing} - Representa todas as mudanças de estado como um evento, registados por ordem
+  cronológica, deste mode, o \textbf{evento passa a ser a principal fonte de
+  verdade do sistema}. Permite a reconstrução da história do sistema com base nos eventos;
+\end{flushleft}
+
+\subsubsection{Vantagens sobre abordagens REST}
+
+As abordagens REST seguem uma \textbf{arquitetura baseada em pedidos}, onde o cliente espera que
+todas as ações despoletadas pelo seu pedido sejam executadas e apenas depois recebe a
+resposta. Em contraste temos a \textbf{arquitetura baseada em eventos}, que apresenta algumas
+vantagens sobre a anterior.
+
+\begin{flushleft}
+  \textbf{Assíncrono} - Permite que os recursos sejam otimizados e passem à tarefa seguinte quando o trabalho que
+  lhes compete está completo. Previne perda de pedidos ou bloqueio dos produtores por pressão dos
+  consumidores.
+
+  \vspace{1mm}
+
+  \textbf{Baixo Acoplamento} - Os serviços operam de forma independente, sem conhecimento dos restantes.
+  Serviços que usam um modelo de eventos para atualizar, testar e
+  deployed independentemente e mais facilmente.
+
+  \vspace{1mm}
+
+  \textbf{Facilmente escalável} - Devido ao desacoplamento, é fácil identificar os serviços mais congestionados e
+  aumentar os seus recursos de forma independente.
+
+  \vspace{1mm}
+
+  \textbf{Suporte à recuperação} - O histórico dos eventos permite a recuperação e análise do que foi feito no
+  passado.
+\end{flushleft}
+
+\subsubsection{Desvantagens}
+
+No entanto, há também algumas desvatangens, como o perigo de \textbf{over-engineer}, ao
+desenvolver soluções demasiado dispersas e complexas que seriam mais simples juntas, e a
+\textbf{gestão complexa de dados e transações}, uma vez que não há suporte para ACID.
+
+\subsubsection{Antipadrões}
+
+\begin{itemize}
+  \item \textbf{Depender em pedido/entrega garantido},
+  vai adicionar complexidade e negar os beneficios chave da
+  arquitetura baseada em eventos;
+  \item \textbf{Otimização prematura}, muitos produtos começam pequenos
+  e crescem com o tempo;
+  \item \textbf{Esperar que Event-Driven resolve tudo},
+  não consegue resolver todos os problemas como falta de
+  testes automáticos, falta de comunicação entre equipas,
+  ou práticas dev-ops out-dated;
+\end{itemize}
+
+\pagebreak
+
+\subsection{Sistemas de Mensagens}
+
+A sua \uline{implementação mais simples} segue o modelo \textbf{point to point}, em que as
+mensagens são enviadas para uma fila que estabelece uma relação de umpara-um entre o produtor e o consumidor, que é gerida pelos dois. Cada
+mensagem é consumida uma única vez.
+
+\begin{center}
+  \includegraphics[scale=0.8]{108}
+\end{center}
+
+A alternativa é o modelo \textbf{publish-subscribe}, onde vários produtores colocam
+os eventos num de vários tópicos, que são entregues a todos os
+consumidores que o tenham subscrito.
+
+\begin{center}
+  \includegraphics[scale=0.8]{109}
+\end{center}
+
+O segundo modelo permite um \uline{maior desacoplamento} entre os processos e a comunicação
+dos eventos, cuja gestão deixa de ser sua responsabilidade e passa a ser tipicamente de uma
+nova aplicação, um \textbf{message broker}. Para além do processamento e encaminhamento das
+mensagens, destaca-se ainda a possibilidade de \uline{conversão entre protocolos de transporte}.
+
+\subsubsection{Message Broker}
+
+Funciona como um message-queuing "relay" que interage com aplicações
+distribuídas.
+
+\vspace{2mm}
+
+Um message broker consegue entender o conteúdo de cada mensagem que
+move pelo Broker. Têm várias funcionalidades como:
+divide o publisher e o consumer, armazena as mensagens entre serviços,
+converte entre diferentes protocolos de transporte, e
+identifica e distribui enventos de negócio
+de várias fontes.
+
+\vspace{2mm}
+
+Um message broker é necessário quando \textbf{queremos controlar
+feeds dos dados}, quando a tarefa \textbf{põe dados em várias
+aplicações}, quando existe uma necessidade de \textbf{completar
+processos em uma ordem definida}.
+
+\subsubsection*{RabbitMQ}
+
+Este é um message broker open-source que implementa o protocolo de comunicação AMQP
+(Advanced Message Queiuing Protocol).
+
+\begin{center}
+  \includegraphics[scale=0.6]{110}
+\end{center}
+
+\pagebreak
+
+As \textbf{mensagens} são constituídas por um header com os seus \uline{atributos} e um \uline{payload} com o
+conteúdo e são publicadas para uma entidade \textbf{exchange}, que faz a sua distribuição pelas
+\textbf{queues}, seja através de \uline{bindings} (ligações diretas) ou \uline{roteamento} com base nos atributos do
+header. Estas mensagens são por sua vez consumidas através de \uline{entrega contínua aos
+subscritores} ou por \uline{pedidos dos clientes}.
+
+\vspace{2mm}
+
+Os \textbf{exchanges} podem ser de vários tipos:
+
+\begin{itemize}
+  \item \textbf{Direct} - Quando as mensagens são encaminhadas para a fila cuja \textbf{binding key} (nome da ligação do
+  exchange à fila) corresponde à \textbf{routing key} (nome do tópico no cabeçalho) da mensagem.
+  \item \textbf{Topic} - Quando as mensagens são entregues às filas cuja \textbf{binding key} corresponde (através de padrões) à
+  \textbf{routing key} da mensagem.
+  \item \textbf{Fanout} - Ignora a \textbf{routing key} e envia a mensagem para todas as filas.
+  \item \textbf{Headers} - Usa o message broker em vez da \textbf{routing key}.
+  \item \textbf{Default (Nameless)} - Dá route da mensagem ao nome
+  da file que é igual à \textbf{routing key}.
+\end{itemize}
+
+\subsection{Sistemas de Streaming de Mensagens}
+
+Este modelo é meio termo entre o \textbf{registo de eventos} e a \textbf{troca transiente de mensagens},
+procurando tirar partido dos benefícios de ambos através da oferta de um stream de eventos
+atualizado continuamente.
+
+\vspace{2mm}
+
+\textbf{"Repensar nos dados não como registos armazenados ou
+mensagens transitórias, mas como um fluxo contínuo de eventos."}
+
+\begin{center}
+  \includegraphics[scale=0.6]{111}
+\end{center}
+
+\subsubsection{Apache Kafka}
+
+Esta é também uma ferramenta open-source que oferece um \uline{sistema de registo de eventos
+sequenciais} ao longo do tempo do tipo \uline{append-log}, \uline{distribuído} e \uline{imutável}.
+
+\pagebreak
+
+\begin{center}
+  \includegraphics[scale=0.6]{112}
+\end{center}
+
+Os \textbf{conectores} são APIs que permitem a ligação a bases de dados. O \textbf{streming engine} permite a utilização do Kafka
+através do paradigma de streams, que permite por exemplo em Java ler os conteúdos de um tópico como se fosse um
+stream sobre uma estrutura de dados ou um ficheiro.
+
+\vspace{2mm}
+
+Destaca-se por estar fora da “fronteira de confiança” das aplicações, uma vez que é
+independentes destas. Caracteriza-se ainda por ser \textbf{escalável} e fazer a \textbf{gestão de fluxos}, ser
+\textbf{tolerante a falhas}, permitir a \textbf{concorrência}, manter a \textbf{ordenação} e ser \textbf{stateful} (com o “replay”
+dos eventos podemos saber o estado de determinada entidade).
+
+É muito utilizado para gerir \textbf{event-sourcing}, uma vez que para este tipo de eventos a ordem e imutabilidade são
+cruciais.
+
+\vspace{2mm}
+
+Cada \textbf{evento} tem uma chave, valor, timestamp, e headers opcionais
+de metadados. Estes são organizados e armazenados como \textbf{tópicos}, estes
+são \textbf{particionados}.
+
+\subsubsection{Kafka APIs}
+
+O Kafka é composto por várias APIs, como
+\textbf{Admin API}, para gerir e inspecionar objetos Kafka,
+\textbf{Producer API}, para publicar (escrever) uma stream
+de ecentos para um ou mais tópicos, \textbf{Consumer API},
+para subscrever (ler) um ou mais tópicos e processar a stream
+de eventos produzidos por estes,
+\textbf{Streams API}, para implementar processamento
+de streams de aplicações e microserviços, e
+\textbf{Connector API}, para construir e executar
+import/export connectors para sistemas externos e
+aplicações.
+
+\vspace{2mm}
+
+De forma a garantir o \textbf{statefulness} devem ser r epresentadas todas
+as mudanças de estado como um evento, registados por ordem
+cronológica, pelo que se recorre ao \textbf{modelo event-sourcing}.
+
+Neste contexto surge ainda o padrão de software \textbf{Command
+Query Response Segregation (CQRS)} que estabelece um
+desacolpamento entre a escrita e a leitura, ou seja, os processos
+que fazem uma e outra devem ser distintos.
+
+\pagebreak
+
+\subsubsection*{Exemplo}
+
+Temos um serviço de email que ouve a uma stream de eventos
+de pedidos e envia emails de confirmação para o user
+assim que o pagamento termina. Isto requer informaçãoes sobre
+o pedido e o pagamento associado. Um serviço assum pode ser criado de várias formas.
+
+Um serviço de \textbf{stateless streaming} que procura
+dados referênciados noutro serviço em runtime:
+
+\begin{center}
+  \includegraphics[scale=0.6]{113}
+\end{center}
+
+Um serviço de \textbf{stateful streaming} que replica
+o tópico do Consumidor para uma tabela local,
+contido dentro do Kafka Streams API:
+
+\begin{center}
+  \includegraphics[scale=0.6]{114}
+\end{center}
+
+A abordagem \textbf{stateful} consiste em incluir todos os elementos fundamentais para a atividade dos
+serviços que subscrevam ao stream de mensagens nos eventos gerados.
+
+\vspace{2mm}
+
+Tem como principal \textbf{desvantagem} a quantidade de dados transacionados que é um preço a
+pagar pela \textbf{vantagem} do desacoplamento e maior velocidade no processamento de eventos,
+uma vez que deixa de ser necessário fazer consultas adicionais.
+
+\vspace{2mm}
+
+De forma a diminuir a carga exigida por esta abordagem, o Kafka providencia um conjunto de
+mecanismos que o simplificam, nomeadamente a \textbf{replicação} dos estados armazenados em
+cada nó, \textbf{checkpoints do disco} para garantir recuperação dos nós em caso de falha e por fim
+\textbf{compressão dos tópicos} de forma a minimizar o tamanho dos dados.
+
+\vspace{2mm}
+
+Para implementar estes sistemas de mensagens em Spring podemos usar
+\textbf{Spring Cloud Stream}, que ajuda a abstrair o código
+da messaging engine. Suporta várias implementações
+como RabbitMQ, Apache Kafka, Kafka Streams, Amazon Kinesis,\dots
+
+\vspace{2mm}
+
+Temos ainda o \textbf{Spring AMQP}, que é uma implementação
+com conceitos de Spring para uma implementação de
+soluções baseadas em AMQP.
+
+\vspace{2mm}
+
+Por fim, \textbf{Spring Cloud Data Flow} permita a criação e
+orquestração de pipelines de dados, ex:
+data ingest, real-time analytics, e data import/export.\
+
+\pagebreak
+
+\section{Segurança da Aplicação}
+
+\subsection{OWASP}
+
+A \textbf{Open Source Web Application Security Project} (OWASP)
+é uma associação sem fins lucrativos suportada por uma
+comunidade internacional que opera como um agregador/normalizador
+de boas práticas, ferramentas, metodologias de teste e estratégias.
+Estruturado em Projetos (Ferramentas e Standards),
+ornaizações locais, eventos e grupos.
+
+\begin{center}
+  \includegraphics[scale=0.4]{115}
+  \includegraphics[scale=0.4]{116}
+\end{center}
+
+\begin{flushleft}
+  \textbf{Shift Left} - Resulta em segurança pouco visível.
+  A aplicação é segura "por design", é uma boa prática,
+  legalmente "obrigatória", gera uma cultura de segurança,
+  que percebe o \uline{risco da app}.
+
+  \vspace{1mm}
+
+  \textbf{Shift Right} - Resulta em segurança muito presente.
+  Ferramentas pelo SDLC, \uline{reativo a vulnerabilidades},
+  introduzindo ferramentas para o backlog, e podemos criar
+  Security Gates que tornam a vida mais complicada para os
+  programadores, que leva à criação de exceções.
+
+  \vspace{1mm}
+
+  O \textbf{Shift Left} falha porque implica um processo de design longo,
+  campeões de segurança podem ser sidelined para acelarar a aplicação,
+  e falta de visibilidade leva a uma valorização baixa (remoção
+  dos campeões).
+
+  \vspace{1mm}
+
+  O \textbf{Shift Right} falha porque as ferramentas criam um
+  grande peso, o backlog aumenta as funcionalidades não
+  alinhadas com o produto, e não é necessário
+  uma cultura de segurança, apenas a habilidade de passar
+  os Security Gates.
+
+  \vspace{1mm}
+
+  O \textbf{Shift Left} imiplica que a equipa tenha um treinamento
+  adequado, desenvolva uma cultura que inclua a segurança,
+  desenhe aplicações com requisitos de segurança, compreenda a
+  superficie de ataque e o risco de exploit, e compreenda
+  as vulnerabilidades e padrões que as criam.
+
+  \vspace{1mm}
+
+  Conisderar algum \textbf{Shift Right} para possuir
+  \uline{aspetos non-design-dependent}. Alguns aspetos
+  incluem a implementação de más práticas de código,
+  erros nas dependências, erros nos fornecedores, erros nas
+  infraestruturas, novas categorias de vulnerabilidades,
+  e requisitos não abrangem todas as usabilidades/interações.
+\end{flushleft}
+
+\subsection{CWE - Padrões e Weaknesses}
+
+Bugs e erros são \textbf{introduzidos por má programação},
+ao contrário das falhas que fazem referência aos requisitos/design.
+Efetivamente, resolver um bug/vulnerabilidade implica \textbf{implementar
+o código correto}, o que muitas vezes não é óbvio.
+Quando resolvemos um bug devemos \textbf{focar no processo que causa o bug}
+e não apenas no bug em si.
+
+\vspace{2mm}
+
+Numa SSDLC (Secure Software Development Lifecycle), deve ser considerado
+que \textbf{nem todos os bugs são iguais}.
+Uma \uline{vulnerabilidade é um bug com uma possibilidade de exploitation}.
+Programadores \textbf{não devem criar bugs}, muito menos vulnerabilidades.
+
+\pagebreak
+
+CWE significa \textbf{Common Weakness Enumeration}, e é uma linguagem
+comum que permite \textbf{enumerar anti-padrões que levam a weaknesses}.
+Uma \textbf{weakness} é uma condição que contribui para a Introdução
+de uma vulnerabilidade.
+Possui uma organização hierárquica com 839 CWEs
+
+Descreve e discute weaknesses numa \textbf{forma uniforme},
+\textbf{Verifica por weaknesses} no softare e hardware,
+verifica que ferramentas cobrem quais weaknesses
+(ferramentas SAST muitas das vezes fornecem análises baseadas
+em CWEs). É a base para a \uline{identificação, mitigação e prevenção
+de weaknesses}. Previne que o software e o hardware tenham
+vulnerabilidades.
+
+\subsubsection{CWE-348: Use of Less Trusted Source}
+
+Esta diz que "O software tem duas fontes dos mesmos dados
+ou informação, mas utiliza a fonte que tem menos suporte para verificação,
+é menos confiada, ou é menos resistente a ataques.".
+
+\begin{center}
+  \includegraphics[scale=0.6]{117}
+\end{center}
+
+\subsection{Riscos - OWASP Top 10}
+
+Esta é uma lista dos \textbf{10 riscos mais frequentes} em aplicações
+web, sendo atualizada a cada 3-4 anos. É uma lista gerada depois
+de um consenso da comunidade (discussão pública) e deve refletir os
+problemas encontrados na realidade. É provávelmente um dos
+aspetos mais discutidos de AppSec.
+
+\begin{center}
+  \includegraphics[scale=0.6]{118}
+\end{center}
+
+Aumenta a \textbf{consciência}, no entanto, \textbf{não é uma norma},
+pelo que a sua utilizdade é limitada no design de aplicações. Além disso,
+não é uma lista completa, é \uline{apenas o top 10} e serve apenas
+para os programadores aprenderem sobre os problemas, isto é,
+permitir a criação de campanhas para evitar os problemas e
+sabes o risco que alguns "bugs" têm.
+Com isto dito, \textbf{não permite a definição de uma estratégia
+de AppSec}.
+
+\vspace{2mm}
+
+Esta lista descreve o problema nos seus aspetos mais comuns,
+define muito sucintamente como previnir o problema,
+demonstra \textbf{cenários de ataque} e mapeia para CWEs.
+
+\pagebreak
+
+\subsection{OWASP ASVS}
+
+A \textbf{Application Security Verification Standard} (ASVS) é uma
+base para definir testes e controlos técnicos para aplicaçoes web, tal
+como requisitos para uma SSDLC.
+
+\subsubsection{Objetivos}
+
+Tem como principais objetivos \textbf{definir os requisitos para uma aplicação segura},
+abstrato, capaz de ser implementado na maior parte das linguagens num ambiente, possuindo
+diferentes requisitos para Web, Mobile e IoT, e \textbf{atua como um
+standard de aplicações seguras}, sendo muito útil: cedo no desenvolvimento,
+para considerar controlos e na aquisição de aplicações.
+É \textbf{baseado em boas práticas e standards existentes}, e escalável
+(por níveis).
+
+\subsubsection{Requisitos}
+
+Que requisitos devemos \textbf{definir para a gestão de armazenamento
+de um ficheiro disponível num página?}
+
+Devemos considerar, que esta deve ser access controlled,
+de servidor para clientes, Web, nível de risco mínimo.
+Mas o serviço expõe dados pessoais? Causa impacto na brand?
+Viola uma lei/regulação/norma? Permite escalar os privilégios?
+
+\textbf{Que requisitos podemos definir para o processo?} Será que vão ser suficientes?
+Vão se alinhar com os riscos atuais? São adequados para embientes legais/regulatórios?\dots
+
+\vspace{2mm}
+
+Com o OWASP Top 10 e controlos proativos, sabemos que:
+alguns problemas devemos evitar, qual o impacto no risco,
+como evitar alguns problemas. Este OWASP Top 10 e
+controlos proativos são bastante para a direita.
+Uma framework útil é necessária ao nível dos requisitos
+(Shift Left).
+
+\subsubsection{Níveis}
+
+\begin{center}
+  \includegraphics[scale=0.5]{119}
+\end{center}
+
+\subsubsection*{Nível 0}
+
+Este nível não tem nenhum conjunto de requistos, pelo que,
+as entidades podem escolher os requisitos que querem ("cherry-pick").
+O ASVS continua a ser útill, mas as entidades têm de condiderar mais.
+
+\textbf{Aplicações que se encontram no Nível 0, não seguem as melhores
+práticas atuais}.
+
+\pagebreak
+
+\subsubsection*{Nível 1}
+
+Considera o \textbf{mínimo} para uma aplicação.
+É completamente testável a partir de fora sme qualquer documentação
+(Black Box Pen Test (Human Assisted), Parcialmente testável
+por aplicações SAST/DAST, considera as vulnerabilidades e ataques
+mais comuns).
+Possui \textbf{cerca de 130 requisitos}.
+
+\vspace{2mm}
+
+A ASVS recomenda a descontinuação de testes de penetração, encorajando
+audits hibridos, como Code Reviews e Grey/White Box.
+
+\subsubsection*{Nível 2}
+
+É considerado \textbf{adequado} para qualquer aplicação, sendo
+definido para aplicações com dados sensíveis, em áreas como
+transações B2B (Business to Business), Commerce e Jogos.
+Tem o objetivo de proteger a aplicação contra atacantes
+especializados. Deve possuir \textbf{um pouco mais do que 130 requisitos}.
+
+\vspace{2mm}
+
+Não é testável pela parte de fora sem acesso a informação interna.
+Algumas validações são processuais: Temos uma ferramenta para
+gerir defeitos? Usamos controlo de versões? Temos um SDLC com
+segurança? Temos Secure and Repeatable Deployments?
+
+\subsubsection*{Nível 3}
+
+Considerado necessário para \textbf{aplicações criticas},
+definido para aplicações com dados muito sensíveis em áreas
+como ambientes militares, saúde, infrastruturas críticas.
+Deve possuir \textbf{cerca de 20 requisitos}.
+
+\subsubsection{Estrutura}
+
+\begin{flushleft}
+  Organizado numa estrutura fixa: \textbf{$<$chapter.section.requirement$>$}
+
+  \vspace{1mm}
+
+  \textbf{Chapters}: scope dos requisitos, 1.X.X = Arquitetura;
+
+  \vspace{1mm}
+
+  \textbf{Sections}: Especifica mais o scope do chapter, 1.7.x
+  = Todos os requisitos "Errors, logging and audit architecture";
+  
+  \vspace{1mm}
+
+  \textbf{Requirement}: O requisito especifico,
+  1.7.2 = Refere à necessidade de registos de segurança remotos (L2).
+\end{flushleft}
+
+\begin{center}
+  \includegraphics[scale=0.5]{120}
+\end{center}
+
+\pagebreak
+
+\subsubsection{Utilização}
+
+É especifico para \textbf{requisitos de novos produtos},
+\textbf{gateways seguros para SDLC's existentes}, identifica/carateriza
+os riscos da aplicação.
+
+Temos de definir o \textbf{nível desejado}, alinhado com o propósito e
+ambiente operacional da nossa aplicação (por exemplo o nível 2).
+O resuktado é uma lista de requisitos e uma checklist.
+Existem vários recursos para calcular isto, incluindo um
+excel oficial da OWASP disponível no GitHub.
+
+
 \end{document}
